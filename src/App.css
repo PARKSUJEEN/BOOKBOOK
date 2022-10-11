@@ -1,38 +1,1066 @@
+@import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz,wght@16..144,700&family=Noto+Sans+KR:wght@100;300;400;500&family=Yeon+Sung&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+
+/* MyButton Home rightChild : Add Box*/
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+/* Mybutton Home leftChild : Setting  */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+/* Mybutton bookdiary leftChild : back */
+
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+
+body {
+  background-color: ivory;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0px;
+}
+
+@media (min-width : 650px){ 
+  .App {
+  width: 640px;
+  }
+
+  .BookItem .BookItem_wrap {
+  
+    display:grid; 
+  
+    grid-template-columns: repeat(1,auto);
+  
+  }
+
+}
+
+@media (max-width: 650px){
+  .App {
+    width: 90vw;
+  }
+
+
+}
+
+
+
+#root {
+  background-color: #ffffff;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+
 .App {
+  min-height: 100vh;
+  /* padding-left: 10px;
+  padding-right: 10px; */
+}
+
+
+.Main {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Main */
+.main_wrap{
+
+ width: 100%;
+
+ 
+}
+
+.maininfo_wrap {
+
+  margin: 50px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main_wrap .clova{
+  font-size: 20px;
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main_wrap .clova_bookbook{
+
+  font-family: 'Montserrat', sans-serif;
+  background:ivory;
+  width:100%;
+  height:100%;
+  padding:0;
+  /* margin:0; */
+  margin-bottom: 20px;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+#text{
+  text-align:center;
+  position:relative;
+  /* top:200px; */
+  font-size:5em;
+color: black;
+-webkit-text-fill-color: white;
+-webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: #000000;
+}
+
+.maininfo_wrap button {
+  cursor: pointer;
+  border: 1px solid #8d5c24;
+  background-color: #ffffff;
+
+
+  color: #8d5c24;
+  font-family: 'Noto Sans KR';
+
+
+  font-weight: 300;
+  font-size: 40px;
+  
+  border-radius: 3px;
+
+  height: 70px;
+  margin-bottom: 10px;
+  
+}
+
+.maininfo_wrap span {
+
+  color: #8d5c24;
+  font-family: 'Noto Sans KR';
+  font-size: 12px;
+}
+
+.MyButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  
+ 
+  padding: 15px;
+  font-size: 22px;
+  white-space: nowrap;
+  background-color: #8d5c24;
+
+}
+
+.MyButton span {
+  font-size: 30px;
+
+}
+.bookbook_Home {
   align-items: center;
+}
+
+header {
+  background-color: #8d5c24;
+  color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  white-space: nowrap;
+
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+  font-family: 'Noto Sans KR';
+  font-weight: 500;
+  
+}
+
+header > div {
+  display: flex;
+
+}
+
+header .head_text {
+  width: 50%;
+  font-size: 30px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+   /* 영역감추기 */
+   /* overflow: hidden;   */
+   /* 잘리는부분 ...으로 */
+   text-overflow: ellipsis;
+   /* 아래줄로 내려가는 것 막기 */
+   white-space: nowrap; 		
+   word-break:break-all;
+
+}
+
+header .head_btn_left {
+  width: 25%;
+  justify-content: start;
+  margin-left: 10px;
+
+
+
+}
+
+header .head_btn_right  {
+  width: 25%;
+  justify-content: end;
+  margin-right: 10px;
+
+ 
+}
+
+/* Setting */
+
+.setting_wrap {
+  text-align: center;
+  margin-top: 30px
+}
+
+.setting_wrap >div {
+  cursor: pointer;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #ececec;
+  padding: 20px;
+
+  white-space: nowrap;
+  
+  font-family: 'Noto Sans KR';
+
+  font-size: 2rem;
+  
+}
+
+.setting_wrap >div:HOVER {
+  background-color: #e6dfd0;
+  
+}
+
+/* BookEditor */
+
+.BookEditor {
+
+  font-family: 'Noto Sans KR';
+
+  margin: auto;
+  padding: 20px;
+
+}
+
+
+.BookEditor p{
+
+ font-size: 13px;
+  
+}
+
+.BookEditor h3{
+  color: #513515;
+}
+
+
+.BookEditor input{
+
+  border: 1px solid #8d5c24;
+
+  width: 80%;
+  height: 30px;
+
+  padding-left: 5px;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  
+}
+
+
+
+.BookEditor .bookname{
+
+
+  
+}
+
+
+
+
+
+.BookEditor button{
+  
+  cursor: pointer;
+
+  font-family: 'Noto Sans KR';
+
+  font-size: 16px;
+
+  border-radius: 7px;
+  width: 130px;
+  height: 40px;
+  padding: auto;
+
   color: white;
+  background-color: #8d5c24;
+  
 }
 
-.App-link {
-  color: #61dafb;
+.BookEditor button:HOVER{
+  background-color: #ececec;
+  color: black;
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.BookEditor .color_list_wrap{
+
+  display:grid;
+  grid-template-columns: repeat(4, auto);
+
+
+  /* display: flex; */
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+
+
+
 }
+
+.BookEditor .BookEditor_btn{
+
+margin-top: 10px;
+margin-left: 280px;
+
+
+}
+
+
+
+
+/* bookColorItem */
+.bookColorItem {
+ 
+  border: 1px solid orange;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+
+}
+
+.bcolor input{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  transition: 0.1s all linear;
+  position: relative; 
+
+ 
+
+  
+}
+
+.bcolor input:HOVER{
+
+  width: 32px;
+  height: 32px;
+ 
+
+}
+
+.bcolor input:checked {
+
+
+
+  border-radius: 50%;
+
+  line-height: 2px;
+  text-align: center;
+
+
+
+}
+
+.bcolor_1 {
+  background-color: #e6b949;
+ 
+}
+
+.bcolor_1:checked {
+  background-color: #ffffff;
+
+  border: 3px solid #e6b949;
+  
+
+ 
+}
+.bcolor_2 {
+  background-color: #b16720;
+
+}
+
+.bcolor_2:checked  {
+  background-color: #ffffff;
+  border: 3px solid #b16720;
+
+
+
+}
+.bcolor_3 {
+  background-color: #d25c3b;
+
+}
+.bcolor_4 {
+  background-color: #853e22;
+
+
+}
+.bcolor_5 {
+  background-color: #e690b7;
+}
+.bcolor_6 {
+  background-color: #70539b;
+}
+.bcolor_7 {
+  background-color: #1f3176;
+}
+
+.bcolor_8 {
+  background-color: #3c1119;
+
+}
+
+
+
+
+
+/* BookList */
+
+.BookList {
+
+  width: 100%;
+
+  
+
+  
+}
+
+.BookList h2{
+  text-align: center;
+  color: #703d13;
+  
+}
+
+.BookList .booklist_wrapper {
+
+
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  margin: 20px 20px;
+  
+  /* justify-content: ; */
+  
+}
+
+/* 
+.BookList .booklist_item{
+  border: 1px solid green;
+} */
+
+/* BookItem */
+
+.BookItem {
+
+}
+.BookItem >div {
+
+
+}
+
+.BookItem .BookItem_wrap {
+  
+  display:grid; 
+  /* row-gap: 0px;
+	 row의 간격을 10px로 */
+/* 	
+  grid-template-columns: repeat(4, minmax(0px, auto)); */
+  grid-template-columns: repeat(3,auto);
+
+}
+
+.BookItem .BookItem_real {
+
+  box-shadow: 5px 5px 5px rgb(188, 188, 188);
+  border-radius: 0.2em;
+  font-size: 15px;
+  height: 180px;
+  margin: 20px;
+  text-align: center;
+  padding-top: 30px;
+
+}
+
+/* BookItem color */
+.BookItem .BookItem_real_1 {
+  background-color: #B68b2c;
+  color: #244242;
+
+}
+.BookItem .BookItem_real_2 {
+  background-color: #666B29;
+  color: #FBF5E9;
+
+}
+.BookItem .BookItem_real_3 {
+  background-color: #d3D9F1;
+  color: #ff6424;
+
+  
+}
+.BookItem .BookItem_real_4 {
+  background-color: #fffCEF;
+  color: #6322eb;
+}
+.BookItem .BookItem_real_5 {
+  background-color: #F6eee3;
+  color: #ea392a;
+
+}
+.BookItem .BookItem_real_6 {
+  background-color: #98a5d8;
+  color: #df58c6;
+}
+.BookItem .BookItem_real_7 {
+  background-color: #1f3176;
+  color: #FBF5E9;
+
+}
+
+.BookItem .BookItem_real_8 {
+  background-color: #3c1119;
+  color: #df58c6;
+
+  
+}
+
+
+
+.BookItem .info{
+  cursor: pointer;
+  /* 영역감추기 */
+  overflow: hidden;  
+  /* 잘리는부분 ...으로 */
+  text-overflow: ellipsis;
+  /* 아래줄로 내려가는 것 막기 */
+  white-space: nowrap; 		
+  word-break:break-all;
+  width: 150px;
+  /* height: 20px; */
+
+  
+  border-top: 4px solid white;
+  border-bottom: 4px solid white;
+ 
+  
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  margin-bottom: 25px;
+}
+
+.BookItem .BookItem_real button{
+ border: none;
+ color: #754545;
+ background-color: #b8b8b8;
+
+}
+
+
+/* Userlogin */
+
+.Userlogin {
+
+}
+
+.Userlogin_wrap{
+  min-height: 100vh;
+  margin-top: 100px;
+  font-family: 'Noto Sans KR';
+
+  white-space: nowrap;
+  
+}
+.Userlogin_wrap >div{
+  /* div 세로정렬 */
+  display: flex;
+  justify-content: center;
+  
+  margin-bottom: 40px;
+  
+}
+
+.Userlogin_wrap label {
+  font-size: 30px;
+  padding: 20px;
+}
+
+.Userlogin_wrap input {
+
+  border: 1px solid #8d5c24;
+  border-radius: 3px;
+
+  width: 400px;
+  height: 80px;
+  padding: 10px;
+
+  font-size: 20px;
+ 
+}
+
+.Userlogin_wrap input:focus {
+  outline: none;
+}
+
+
+.Userlogin_wrap button {
+
+  cursor: pointer;
+  
+  border: none;
+
+  background-color: #8d5c24;
+  color: white;
+  font-size: 30px;
+  border-radius: 5px;
+  width: 200px;
+  height: 80px;
+  margin-right: 20px;
+  font-family: 'Noto Sans KR';
+
+  text-align: center;
+}
+
+/* Register */
+
+.Register {
+
+}
+
+.Register_wrap {
+  min-height: 100vh;
+  margin-top: 100px;
+    font-family: 'Noto Sans KR';
+
+  white-space: nowrap;
+}
+
+.Register_wrap >div{
+   /* div 세로정렬 */
+   display: flex;
+   justify-content: center;
+   
+   margin-bottom: 40px;
+}
+
+.Register_wrap label {
+  font-size: 30px;
+  padding: 20px;
+}
+
+
+.Register_wrap input {
+
+  border: 1px solid #8d5c24;
+  border-radius: 3px;
+
+  width: 400px;
+  height: 80px;
+  padding: 10px;
+
+  font-size: 20px;
+ 
+}
+
+.register_btn button{
+
+  cursor: pointer;
+  
+  border: none;
+
+  background-color: #8d5c24;
+  color: white;
+  font-size: 30px;
+  border-radius: 5px;
+  width: 300px;
+  height: 80px;
+  margin-right: 20px;
+
+  font-family: 'Noto Sans KR';
+
+  text-align: center;
+}
+
+/* Bookdiary */
+
+.BookDiary {
+ 
+
+
+}
+
+.BookDiary_wrap {
+
+  width: 100%;
+  /* min-height: 100vh; */
+  margin-top: 10px;
+}
+
+.BookDiary_wrap >div {
+  
+  
+  /* display: flex; */
+  
+  margin-bottom: 20px;
+}
+
+
+.BookDiary_img {
+  
+  margin: auto;
+
+  width: 90%;
+  height: 300px;
+  background-color: #e6dfd0;
+}
+
+.BookDiary_btn{
+
+
+
+ text-align: center;
+
+  
+}
+
+.BookDiary_btn button{
+  margin-right: 20px;
+  margin-left: 20px;
+  border: none;
+  min-width: 30%;
+  height: 60px;
+  font-family: 'Noto Sans KR';
+}
+
+.BookDiary_new_btn {
+  text-align: center;
+
+}
+.BookDiary_new_btn button {
+ 
+  cursor: pointer;
+
+  border: none;
+  width: 90%;
+  height: 60px;
+  border-radius: 5px;
+
+  background-color: #e6dfd0;
+  color: white;
+
+  font-size: 20px;
+  font-family: 'Noto Sans KR';
+
+}
+
+/* BookDiaryList */
+
+.BookDiaryList {
+
+
+  margin: auto;
+
+
+
+ 
+
+}
+
+.BookDiaryList >div {
+
+  
+
+  
+}
+
+.BookDiaryList_wrap {
+
+  
+
+/* padding-left: 30px; */
+/* padding: 15px 15px; */
+
+}
+
+
+/* BookDiaryItem */
+
+.BookDiaryItem {
+  align-items: center;
+  width: 100%;
+
+ 
+  
+  background-color: #e6dfd0;
+}
+
+.BookDiaryItem >div{
+
+ margin-bottom: 10px;
+}
+
+.BookDiaryItem_wrap{
+
+  padding: 20px;
+}
+
+
+
+.BookDiaryItem_wrap .title {
+  color: #ffffff;
+  font-size: 30px;
+  padding: 10px;
+  white-space: nowrap; 		
+  word-break:break-all;
+}
+
+.BookDiaryItem_wrap .title span{
+font-size: 65px;
+font-family: 'Montagu Slab';
+font-weight: 700;
+padding-right: 10px;
+
+}
+
+.BookDiaryItem_wrap .date {
+  padding: 10px;
+  font-size: 13px;
+  color:#5a5a5a
+}
+.BookDiaryItem_wrap .content {
+  padding: 10px;
+}
+
+
+
+/* BookContent 일기상세보기 */
+.BookContent {
+  font-family: 'Noto Sans KR';
+
+}
+
+.BookContent >div{
+  margin: 20px;
+  
+}
+
+.BookContent .BookContent_wrap {
+ 
+  margin-bottom: 20px;
+  
+  
+}
+
+.BookContent_wrap .bookname{
+  font-size: 12px;
+  margin-bottom: 10px;
+  
+
+}
+
+.BookContent_wrap .title{
+  font-size: 30px;
+  /* text-align: center; */
+  /* padding-left: 20px; */
+  margin-bottom: 20px;
+}
+
+
+
+.BookContent_wrap .title span{
+  font-size: 80px;
+  font-family: 'Montagu Slab';
+  font-weight: 700;
+  padding-right: 10px;
+  }
+
+.BookContent_wrap .content{
+
+  min-width: 90%;
+  min-height: 200px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+
+  word-break: break-all;
+  line-height: 1.6;
+  
+}
+
+.BookContent_wrap .date{
+  color: #a4a4a4;
+  font-size: 10px;
+  border-bottom: 1px solid #a4a4a4;
+  padding-bottom: 25px;
+
+}
+
+.BookContent_wrap .userName{
+  color: #a4a4a4;
+
+  font-size: 14px;
+ }
+
+.BookContent_wrap .btn{
+  text-align: center;
+
+}
+
+.BookContent_wrap button{ 
+  cursor: pointer;
+ align-items: center;
+ border: none;
+ background-color:#8d5c24;
+ border-radius: 5px;
+ width: 100px;
+ height:50px;
+ margin-left: 20px;
+ margin-right: 20px;
+ color: white;
+ font-size: 18px;
+ font-family: 'Noto Sans KR';
+
+}
+
+/* BookDiaryEdit */
+
+.BookDiaryEdit {
+
+}
+
+.BookDiaryEdit_wrap {
+width: 100%;
+min-height: 100vh;
+margin-top: 50px;
+font-family: 'Noto Sans KR';
+white-space: nowrap;
+ /* display: flex;
+ justify-content: center; */
+ text-align: center;
+ 
+
+}
+
+.BookDiaryEdit_wrap >div{
+  margin-bottom: 20px;
+}
+
+
+.BookDiaryEdit_wrap input{
+
+  /* display: flex; */
+  justify-content: center;
+  border: 1px solid #8d5c24;
+  border-radius: 3px;
+  /* margin-left: 30px;
+  margin-right: 20px; */
+  
+
+  
+}
+
+.BookDiaryEdit_wrap textarea{
+  justify-content: center;
+  border: 1px solid #8d5c24;
+  border-radius: 3px;
+  /* margin-left: 30px; */
+
+  width: 90%;
+  height: 300px;
+
+  
+}
+
+.BookDiaryEdit_wrap .input_date{
+ 
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  font-family: 'Noto Sans KR';
+
+
+  cursor: pointer;
+}
+
+
+.inputdate_wrap{
+  text-align: center;
+}
+
+.BookDiaryEdit_wrap .input_title{
+
+  box-sizing: border-box;
+  height: 50px;
+  padding: 10px;
+  width: 90%;
+  font-size: 15px;
+}
+
+.input_content{
+  font-family: 'Noto Sans KR';
+
+  font-size: 14px;
+  box-sizing: border-box;
+  
+  min-height: 200px;
+  /* 가로로 늘어나는 것을 방지 */
+  resize: vertical; 
+
+  border: none;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-top: 10px;
+  
+}
+
+.BookDiaryEdit_wrap .btn{ 
+  text-align: center;
+}
+
+.BookDiaryEdit_wrap button{ 
+
+cursor: pointer;
+align-items: center;
+ border: none;
+ background-color:#8d5c24;
+ border-radius: 5px;
+ width: 130px;
+ height:60px;
+
+ margin-left:20px;
+ 
+ color: white;
+ font-size: 18px;
+ font-family: 'Noto Sans KR';
+
+}
+

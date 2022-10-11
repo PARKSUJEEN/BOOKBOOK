@@ -1,0 +1,96 @@
+
+
+.wrapper {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrapper .background {
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.wrapper button {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+  }
+
+.wrapper > section {
+  
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+  }
+
+  .wrapper > section > header {
+    position: relative;
+    padding: 10px 10px 10px 10px;
+    background-color: #8d5c24;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+}
+  .wrapper > section > header button {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: transparent;
+  }
+
+  .wrapper > section > header button:HOVER  {
+    background-color: white;
+    color:#e6dfd0;
+    }
+
+    
+.wrapper .contents {
+    display: flex;
+    justify-content: center;
+  width: 300px;
+
+}
+
+.content {
+    margin:auto;
+    align-items: center;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-bg-show 0.3s;
+    
+}
+
+/* .buttonbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+} */
