@@ -14,7 +14,7 @@
 
 
 body {
-  background-color: ivory;
+  background-color: #F9F5E0;
   display: flex;
   justify-content: center;
   min-height: 100vh;
@@ -29,10 +29,12 @@ body {
   .BookItem .BookItem_wrap {
   
     display:grid; 
-  
+    
     grid-template-columns: repeat(1,auto);
   
   }
+
+  
 
 }
 
@@ -121,7 +123,7 @@ color: black;
   border-radius: 3px;
 
   height: 70px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   
 }
 
@@ -263,8 +265,8 @@ header .head_btn_right  {
 
   padding-left: 5px;
 
-  margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-top: 10px; */
+  /* margin-bottom: 10px; */
   border-radius: 5px;
   
 }
@@ -336,10 +338,13 @@ margin-left: 280px;
 /* bookColorItem */
 .bookColorItem {
  
-  border: 1px solid orange;
-  margin-right: 10px;
+  /* border: 1px solid orange; */
+  /* margin-right: 10px;
   margin-left: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 10px; */
+
+  padding: 20px;
+  margin: 10px
 
 
 }
@@ -440,10 +445,48 @@ margin-left: 280px;
 .BookList {
 
   width: 100%;
-
   
-
   
+}
+
+
+
+.BookList_findBook {
+  display: flex;
+  justify-content : center;
+  margin-top:20px;
+ 
+}
+
+.BookList_findBook >div  {
+  margin-left:10px;
+  margin-right: 5px;
+}
+
+
+
+.BookList_findBook input {
+  border: none;
+  border-bottom: 1px solid #703d13;
+  box-sizing: border-box;
+	transition:.3s;
+  
+}
+
+.BookList_findBook input:focus {
+  border: none;
+  border-bottom: 1px solid #703d13;
+}
+
+
+.BookList_findBook button {
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: #703d13;
+  width: 40px;
+  height: 20px;
 }
 
 .BookList h2{
@@ -548,6 +591,7 @@ margin-left: 280px;
 
 
 .BookItem .info{
+
   cursor: pointer;
   /* 영역감추기 */
   overflow: hidden;  
@@ -560,8 +604,8 @@ margin-left: 280px;
   /* height: 20px; */
 
   
-  border-top: 4px solid white;
-  border-bottom: 4px solid white;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
  
   
   padding-top: 10px;
@@ -583,7 +627,7 @@ margin-left: 280px;
 /* Userlogin */
 
 .Userlogin {
-
+  background-color:  #8d5c24;
 }
 
 .Userlogin_wrap{
@@ -610,11 +654,12 @@ margin-left: 280px;
 
 .Userlogin_wrap input {
 
-  border: 1px solid #8d5c24;
+ 
+  border: none;
   border-radius: 3px;
 
-  width: 400px;
-  height: 80px;
+  width: 300px;
+  height: 40px;
   padding: 10px;
 
   font-size: 20px;
@@ -636,8 +681,8 @@ margin-left: 280px;
   color: white;
   font-size: 30px;
   border-radius: 5px;
-  width: 200px;
-  height: 80px;
+  width: 140px;
+  height: 60px;
   margin-right: 20px;
   font-family: 'Noto Sans KR';
 
@@ -661,8 +706,8 @@ margin-left: 280px;
 .Register_wrap >div{
    /* div 세로정렬 */
    display: flex;
-   justify-content: center;
-   
+   align-items: center;
+
    margin-bottom: 40px;
 }
 
@@ -677,8 +722,8 @@ margin-left: 280px;
   border: 1px solid #8d5c24;
   border-radius: 3px;
 
-  width: 400px;
-  height: 80px;
+  width: 200px;
+  height: 50px;
   padding: 10px;
 
   font-size: 20px;

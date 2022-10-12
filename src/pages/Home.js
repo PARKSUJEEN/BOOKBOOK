@@ -12,6 +12,7 @@ import ModalTest from "./ModalTest";
 
 import New from "./New";
 import Setting from "./Setting";
+import BookSearch from "./BookSearch";
 
 const Home = () => {
   const { data } = useContext(BookStateContext);
@@ -21,7 +22,7 @@ const Home = () => {
   const onModal = useCallback(() => {
     showModal(
       true,
-      "테스트",
+      "책 추가",
       () => console.log("모달 on"),
       null,
       <New
@@ -57,21 +58,20 @@ const Home = () => {
       <MyHeader
         leftChild={
           <MyButton
-            text={<span class="material-symbols-outlined">settings</span>}
+            text={<span className="material-symbols-outlined">settings</span>}
             onClick={onMenu}
           />
         }
         headText={`${udata.udata.name}의 책장`}
         rightChild={
           <MyButton
-            text={<span class="material-symbols-outlined">add_box</span>}
+            text={<span className="material-symbols-outlined">add_box</span>}
             onClick={onModal}
           />
         }
       />
-
+      {/* <BookSearch /> */}
       <ModalTest modalOption={modalOption} />
-
       <BookList bookdata={data} />
     </div>
   );

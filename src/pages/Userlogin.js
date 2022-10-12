@@ -8,43 +8,41 @@ const Userlogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const [user, setUser] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
-  // const handleInput = (e) => {
-  //   setUser({
-  //     ...user,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // const handleSubmit = () => {
-  //   if(user.email.length<)
-  // }
-
+  const emailInput = useRef();
+  const passwordInput = useRef();
   const navigate = useNavigate();
-  const inputFocus = useRef(null);
 
-  useEffect(() => {
-    if (inputFocus.current !== null) inputFocus.current.focus();
-  }, []);
+  const handleSubmit = () => {
+    if (email.length < 1) {
+      emailInput.current.focus();
+
+      return;
+    }
+
+    if (password.length < 1) {
+      passwordInput.current.focus();
+
+      return;
+    }
+
+    login();
+  };
 
   const login = async () => {
-    console.log("login함수 실행");
-
     try {
       const auth = getAuth();
+
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
       navigate("/", { replace: true });
     } catch (error) {
       if (error.message === "Firebase: Error (auth/wrong-password).") {
-        alert("비밀번호가 잘못됨");
+        alert("비밀번호를 재확인해주세요");
       } else if (error.message === "Firebase: Error (auth/user-not-found).") {
         alert("email을 찾을 수 없습니다.");
         setPassword("");
+      } else {
+        alert(error);
       }
     }
   };
@@ -64,7 +62,11 @@ const Userlogin = () => {
           headText={"로그인"}
           leftChild={
             <MyButton
-              text={"🔨"}
+              text={
+                <span className="material-symbols-outlined">
+                  arrow_back_ios
+                </span>
+              }
               onClick={() => {
                 window.location.href = "/";
               }}
@@ -74,28 +76,25 @@ const Userlogin = () => {
       </div>
       <div className="Userlogin_wrap">
         <div className="login_email">
-          {/* <label>이메일</label> */}
           <input
             type="email"
             value={email}
             placeholder="이메일"
             onChange={onEmailhandler}
-            required
-            ref={inputFocus}
+            ref={emailInput}
           />
         </div>
         <div className="login_password">
-          {/* <label>비밀번호</label> */}
           <input
             type="password"
             value={password}
             placeholder="비밀번호"
             onChange={onPasswordhandler}
-            required
+            ref={passwordInput}
           />
         </div>
         <div className="login_btn">
-          <button onClick={login}>로그인</button>
+          <button onClick={handleSubmit}>로그인</button>
           <button
             className="login_btn"
             onClick={() => {

@@ -6,6 +6,7 @@ import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
 import Edit from "./Edit";
 import Loading from "./Loading";
+import ModalTest from "./ModalTest";
 import useModal from "./useModal";
 
 const BookDiary = () => {
@@ -20,7 +21,13 @@ const BookDiary = () => {
   const [loading, setLoading] = useState(true);
 
   const onClick = useCallback(() => {
-    showModal(true, "안녕하세요", () => console.log("모달 on"), null, <Edit />);
+    showModal(
+      true,
+      "책이름 수정하기",
+      () => console.log("모달 on"),
+      null,
+      <Edit />
+    );
   }, [modalOption]);
 
   useEffect(() => {
@@ -46,7 +53,9 @@ const BookDiary = () => {
                 navigate("/", { replace: true });
               }}
               text={
-                <span class="material-symbols-outlined">arrow_back_ios</span>
+                <span className="material-symbols-outlined">
+                  arrow_back_ios
+                </span>
               }
             />
           }
@@ -55,7 +64,7 @@ const BookDiary = () => {
       </div>
 
       <div className="BookDiary_wrap">
-        <div className="BookDiary_img">사진페이지</div>
+        {/* <div className="BookDiary_img">사진페이지</div> */}
         <div className="BookDiary_btn">
           <button
             onClick={() => {
@@ -78,6 +87,7 @@ const BookDiary = () => {
             책장 수정하기
           </button>
         </div>
+        <ModalTest modalOption={modalOption} />
 
         <div className="BookDiary_new_btn">
           <button

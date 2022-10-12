@@ -20,13 +20,13 @@ const BookItem = ({ bookname, id, isEdit, bookcolor }) => {
           <div className="info" onClick={goDetail}>
             <span>{bookname}</span>
           </div>
-          <button
+          {/* <button
             onClick={() => {
               onRemove(id);
             }}
           >
             삭제
-          </button>
+          </button> */}
           {/* <div>마지막 기록일</div> */}
         </div>
       </div>

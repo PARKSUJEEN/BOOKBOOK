@@ -14,11 +14,11 @@ import useModal from "./useModal";
 const Setting = ({ onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modalOption, showModal] = useModal();
+  const navigate = useNavigate();
 
   const onEditName = useCallback(() => {
-    console.log("클릭oonEdit");
-    showModal(true, "setting", () => console.log("모달 on"), null, <Name />);
-  }, [modalOption]);
+    navigate("/name", { replace: true });
+  });
 
   const auth = getAuth();
   const user = auth.currentUser;
@@ -27,8 +27,6 @@ const Setting = ({ onClose }) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
       }
     });
   };
@@ -57,7 +55,6 @@ const Setting = ({ onClose }) => {
     login();
   }, []);
 
-  const navigate = useNavigate();
   return (
     <div>
       {/* <MyHeader

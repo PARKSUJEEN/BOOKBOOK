@@ -44,7 +44,9 @@ const BookEdit = () => {
                 navigate(-1);
               }}
               text={
-                <span class="material-symbols-outlined">arrow_back_ios</span>
+                <span className="material-symbols-outlined">
+                  arrow_back_ios
+                </span>
               }
             />
           }

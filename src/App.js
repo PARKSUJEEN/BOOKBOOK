@@ -23,17 +23,14 @@ import Home from "./pages/Home";
 import BookEdit from "./pages/BookEdit";
 import BookContent from "./pages/BookContent";
 import BookNew from "./pages/BookNew";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import Main from "./pages/Main";
 import Loading from "./pages/Loading";
+import Name from "./pages/Name";
 
-const userreducer = (state, action) => {
-  let newState = [];
+const userreducer = (state2, action) => {
+  let newState2 = [];
   switch (action.type) {
     case "LOGIN": {
       return action.udata;
@@ -41,11 +38,22 @@ const userreducer = (state, action) => {
     case "MODAL": {
       return action.udata;
     }
+    case "NAMECHANGE": {
+      newState2 = state2.map((it) =>
+        it.uid === action.uid
+          ? {
+              ...it,
+              name: action.newName,
+            }
+          : it
+      );
+      break;
+    }
     default:
-      return state;
+      return state2;
   }
 
-  return newState;
+  return newState2;
 };
 
 const reducer = (state, action) => {
@@ -127,25 +135,24 @@ function App() {
   useEffect(() => {
     login();
   }, []);
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const auth = getAuth();
   const user = auth.currentUser;
 
-  const login = () => {
-    let useruser = [];
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const login = () => {
     onAuthStateChanged(auth, (user) => {
       // setLoading(true);
+
       if (user) {
         setIsLoggedIn(true);
         getData(user);
         getUser(user);
-
-        console.log("login함수도 계속해서 실행중");
-      } else {
-        //   setIsLoggedIn(false);
+        return;
       }
+
+      console.log("로그인x");
+      console.log("login함수도 계속해서 실행중? 수정test");
     });
   };
 
@@ -157,36 +164,36 @@ function App() {
     element: null,
   };
 
-  const useModal = () => {
-    console.log("userModal실행");
-    const [modalOption, setModalOption] = useState(OPTION);
+  // const useModal = () => {
+  //   console.log("userModal실행");
+  //   const [modalOption, setModalOption] = useState(OPTION);
 
-    const showModal = useCallback(
-      (show, title, onSubmitCallback, onCloseCallback, element) => {
-        setModalOption((prev) => ({
-          ...prev,
-          show,
-          title,
-          onSubmit: () => {
-            if (onSubmitCallback) onSubmitCallback();
-            setModalOption((prev) => ({ ...prev, show: false }));
-          },
-          onClose: () => {
-            if (onCloseCallback) onCloseCallback();
-            setModalOption((prev) => ({ ...prev, show: false }));
-          },
-          element,
-        }));
-      },
-      [modalOption]
-    );
+  //   const showModal = useCallback(
+  //     (show, title, onSubmitCallback, onCloseCallback, element) => {
+  //       setModalOption((prev) => ({
+  //         ...prev,
+  //         show,
+  //         title,
+  //         onSubmit: () => {
+  //           if (onSubmitCallback) onSubmitCallback();
+  //           setModalOption((prev) => ({ ...prev, show: false }));
+  //         },
+  //         onClose: () => {
+  //           if (onCloseCallback) onCloseCallback();
+  //           setModalOption((prev) => ({ ...prev, show: false }));
+  //         },
+  //         element,
+  //       }));
+  //     },
+  //     [modalOption]
+  //   );
 
-    return [modalOption, showModal];
-    dispatch3({ type: "MODAL", udata: modalOption });
-  };
+  //   return [modalOption, showModal];
+  //   dispatch3({ type: "MODAL", udata: modalOption });
+  // };
 
   const getData = async (user) => {
-    console.log("getData함수 실행");
+    console.log("getData함수 실행>>>>", user.id);
 
     let initData = [];
     const querySnapshot = await getDocs(collection(db, "booklist"));
@@ -236,7 +243,7 @@ function App() {
         id: dataId,
         bookcolor: bookColor,
         date: bookdate,
-        user_uid: user.uid,
+        user_uid: "",
       });
 
       console.log(
@@ -386,6 +393,24 @@ function App() {
     []
   );
 
+  // const onNameEdit = useCallback(async (targetId, name) => {
+  //   dispatch3({
+  //     type: "NAMECHANGE",
+  //     udata: {
+  //       id: targetId,
+  //       name,
+  //     },
+  //   });
+  //   console.log("onNameEdit 실행");
+  //   console.log("onNameEdit 실행", name);
+
+  //   const newUsernameRef = doc(db, "user", user.email);
+  //   console.log(newUsernameRef);
+  //   await updateDoc(newUsernameRef, {
+  //     name: name,
+  //   });
+  // }, []);
+
   return (
     <userContext.Provider value={{ udata }}>
       <BookStateContext.Provider value={{ data, bddata }}>
@@ -421,12 +446,17 @@ function App() {
                     path="/diary/:id/:key/read"
                     element={<BookContent />}
                   />
+                  <Route path="/name" element={<Name />} />
+
+                  <Route path="/login" element={<Userlogin />} />
+
                   <Route path="/diary/:id/write" element={<BookEdit />} />
                   <Route path="/diary/:id/:key/edit" element={<BookEdit />} />
                   <Route path="/new" element={<New />} />
                 </Routes>
               ) : (
                 <Routes>
+                  {/* <Route Route path="/" element={<Loading />} /> */}
                   <Route path="/" element={<Main />} />
                   <Route path="/login" element={<Userlogin />} />
                   <Route path="/register" element={<Register />} />
