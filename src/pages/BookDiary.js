@@ -6,7 +6,9 @@ import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
 import Edit from "./Edit";
 import Loading from "./Loading";
-import ModalTest from "./ModalTest";
+import Modal from "./Modal";
+import NullPage from "./NullPage";
+import Pagination from "./Pagination";
 import useModal from "./useModal";
 
 const BookDiary = () => {
@@ -31,9 +33,7 @@ const BookDiary = () => {
   }, [modalOption]);
 
   useEffect(() => {
-    console.log("id>>>", id);
     const targetName = initData.data.find((it) => it.id === id);
-    console.log("targetname", targetName);
     if (targetName) {
       setBname(targetName);
       setLoading(false);
@@ -59,23 +59,22 @@ const BookDiary = () => {
               }
             />
           }
-          headText={loading ? "" : `${bname.bookname}`}
+          headText={loading ? "" : `${bname.bookname}`.slice(0, 19)}
         />
       </div>
 
       <div className="BookDiary_wrap">
-        {/* <div className="BookDiary_img">사진페이지</div> */}
+        <NullPage />
         <div className="BookDiary_btn">
           <button
             onClick={() => {
-              if (window.confirm(`${id}번째 일기를 삭제할끼니?`)) {
+              if (window.confirm(`책을 정말 삭제하실건가요?`)) {
                 onRemove(id);
-                console.log(id);
                 navigate("/");
               }
             }}
           >
-            책장 삭제하기
+            Del
           </button>
           <button
             onClick={() => {
@@ -84,10 +83,10 @@ const BookDiary = () => {
               }
             }}
           >
-            책장 수정하기
+            Edit
           </button>
         </div>
-        <ModalTest modalOption={modalOption} />
+        <Modal modalOption={modalOption} />
 
         <div className="BookDiary_new_btn">
           <button

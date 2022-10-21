@@ -34,6 +34,7 @@ const Setting = ({ onClose }) => {
   const logout = useCallback(() => {
     signOut(auth)
       .then(() => {
+        onClose();
         window.location.reload();
       })
       .catch((error) => {
@@ -53,22 +54,10 @@ const Setting = ({ onClose }) => {
 
   useEffect(() => {
     login();
-  }, []);
+  }, [user]);
 
   return (
     <div>
-      {/* <MyHeader
-        leftChild={
-          <MyButton
-            text={"<"}
-            onClick={() => {
-              window.location.href = "/";
-            }}
-          />
-        }
-        headText={"설정"}
-      /> */}
-
       <div className="setting_wrap">
         <>
           {isLoggedIn ? (

@@ -1,19 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BookDispatchContext, BookStateContext } from "../../App";
-import { getStringDate } from "../../util/date";
-
-import MyHeader from "../MyHeader";
+import { BookDispatchContext } from "../../App";
+import { getStringDate, getStringDateTime } from "../../util/date";
 
 const BookDiaryEditor = ({ isEdit, originData }) => {
   const [bdiaryTitle, setBdiaryTitle] = useState("");
   const [bdiaryContent, setBdiaryContent] = useState("");
   const [bdiaryDate, setBdiaryDate] = useState(getStringDate(new Date()));
   const { id } = useParams();
-
-  const date = new Date();
-
-  console.log(bdiaryDate.toLocaleString());
 
   const navigate = useNavigate();
   const { onTitleCreate, onTitleEdit } = useContext(BookDispatchContext);
@@ -36,14 +30,16 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
       }
 
       if (bdiaryContent.length < 1) {
+        alert("내용을 입력해주세요");
         return;
       }
+
+      setBdiaryDate(getStringDateTime(new Date()));
+
       onTitleCreate(bdiaryTitle, bdiaryContent, bdiaryDate, bdiaryId, id);
       navigate(-1, { replace: true });
-      alert("저장성공");
     } else {
       onTitleEdit(originData.id, bdiaryTitle, bdiaryContent, bdiaryDate, id);
-
       navigate(-1, { replace: true });
     }
   };
@@ -88,12 +84,24 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
           {isEdit ? (
             <>
               <button onClick={onhandleSubmit}>수정하기</button>
-              <button>취소하기</button>
+              <button
+                onClick={() => {
+                  navigate(-1, { replace: true });
+                }}
+              >
+                취소하기
+              </button>
             </>
           ) : (
             <>
               <button onClick={onhandleSubmit}>저장하기</button>
-              <button>취소하기</button>
+              <button
+                onClick={() => {
+                  navigate(-1, { replace: true });
+                }}
+              >
+                취소하기
+              </button>
             </>
           )}
         </div>

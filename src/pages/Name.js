@@ -1,27 +1,33 @@
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { userContext } from "../App";
 import { db } from "../assets/fbase";
 import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
 
 const Name = () => {
-  const { onNameEdit, udata } = useContext(userContext);
-  const [name, setName] = useState("");
+  const { udata } = useContext(userContext);
+  const [name, setName] = useState(udata.name);
+
+  const navigate = useNavigate();
 
   const onChangeName = (e) => {
     setName(e.target.value);
   };
 
   const nameSubmit = async () => {
-    console.log("onNameEdit 실행", name);
-
+    if (name.length < 3 || name.length >= 10) {
+      alert("이름 규칙을 지켜주세요(´•᎑•`)♡ ");
+      return;
+    }
     const newUsernameRef = doc(db, "user", udata.email);
-    console.log("namesubmit", newUsernameRef);
     await updateDoc(newUsernameRef, {
       uid: udata.uid,
       name: name,
     });
+
+    navigate("/home", { replace: true });
   };
 
   return (
@@ -33,16 +39,20 @@ const Name = () => {
               <span className="material-symbols-outlined">arrow_back_ios</span>
             }
             onClick={() => {
-              window.location.href = "/.";
+              window.location.href = "/";
             }}
           />
         }
       />
-      <div>
-        이름
-        <input type="text" value={name} onChange={onChangeName} />
-        바뀐 이름은 모든 데이터에 적용됩니다.
-        <div>
+      <div className="Name">
+        <div className="Name_name">
+          <label>이름</label>
+        </div>
+        <div className="Name_input">
+          <input type="text" value={name} onChange={onChangeName} />
+        </div>
+        <div className="Name_info">바뀐 이름은 모든 기록에 적용됩니다!</div>
+        <div className="Name_btn">
           <button onClick={nameSubmit}>수정하기</button>
         </div>
       </div>

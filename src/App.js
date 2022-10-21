@@ -35,9 +35,7 @@ const userreducer = (state2, action) => {
     case "LOGIN": {
       return action.udata;
     }
-    case "MODAL": {
-      return action.udata;
-    }
+
     case "NAMECHANGE": {
       newState2 = state2.map((it) =>
         it.uid === action.uid
@@ -128,10 +126,6 @@ function App() {
 
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
   useEffect(() => {
     login();
   }, []);
@@ -142,8 +136,6 @@ function App() {
 
   const login = () => {
     onAuthStateChanged(auth, (user) => {
-      // setLoading(true);
-
       if (user) {
         setIsLoggedIn(true);
         getData(user);
@@ -152,49 +144,10 @@ function App() {
       }
 
       console.log("로그인x");
-      console.log("login함수도 계속해서 실행중? 수정test");
     });
   };
 
-  const OPTION = {
-    show: false,
-    title: "",
-    onSubmit: () => {},
-    onClose: () => {},
-    element: null,
-  };
-
-  // const useModal = () => {
-  //   console.log("userModal실행");
-  //   const [modalOption, setModalOption] = useState(OPTION);
-
-  //   const showModal = useCallback(
-  //     (show, title, onSubmitCallback, onCloseCallback, element) => {
-  //       setModalOption((prev) => ({
-  //         ...prev,
-  //         show,
-  //         title,
-  //         onSubmit: () => {
-  //           if (onSubmitCallback) onSubmitCallback();
-  //           setModalOption((prev) => ({ ...prev, show: false }));
-  //         },
-  //         onClose: () => {
-  //           if (onCloseCallback) onCloseCallback();
-  //           setModalOption((prev) => ({ ...prev, show: false }));
-  //         },
-  //         element,
-  //       }));
-  //     },
-  //     [modalOption]
-  //   );
-
-  //   return [modalOption, showModal];
-  //   dispatch3({ type: "MODAL", udata: modalOption });
-  // };
-
   const getData = async (user) => {
-    console.log("getData함수 실행>>>>", user.id);
-
     let initData = [];
     const querySnapshot = await getDocs(collection(db, "booklist"));
 
@@ -208,8 +161,6 @@ function App() {
   };
 
   const getUser = async (user) => {
-    console.log("getUser함수실행");
-
     const querySnapshot = await getDocs(collection(db, "user"));
 
     querySnapshot.forEach((doc) => {
@@ -220,7 +171,7 @@ function App() {
       }
     });
 
-    setLoading(false);
+    return setLoading(false);
   };
 
   const dataId = Math.random().toString(36).substring(2, 7);
@@ -228,22 +179,27 @@ function App() {
   const onCreate = useCallback(async (bookname, bookColor, bookdate) => {
     dispatch({
       type: "CREATE",
-      data: { bookname, id: dataId, bookcolor: bookColor, date: bookdate },
+      data: {
+        bookname,
+        id: dataId,
+        bookcolor: bookColor,
+        date: new Date(bookdate).getTime(),
+      },
     });
-    const newBook = {
-      bookname,
-      id: dataId,
-      bookcolor: bookColor,
-      date: bookdate,
-    };
+    // const newBook = {
+    //   bookname,
+    //   id: dataId,
+    //   bookcolor: bookColor,
+    //   date: bookdate,
+    // };
 
     try {
       const docRef = await setDoc(doc(db, "booklist", dataId), {
         bookname: bookname,
         id: dataId,
         bookcolor: bookColor,
-        date: bookdate,
-        user_uid: "",
+        date: new Date(bookdate).getTime(),
+        user_uid: user.uid,
       });
 
       console.log(
@@ -293,8 +249,6 @@ function App() {
   }, []);
 
   const onTitleGet = async (targetId) => {
-    console.log("targetId", targetId);
-
     let initBookData = [];
 
     const querySnapshot = await getDocs(
@@ -302,13 +256,8 @@ function App() {
     );
 
     querySnapshot.forEach((doc) => {
-      //  setLoading(false);
-
       initBookData.push(doc.data());
     });
-
-    console.log("ontitleget 실행완");
-
     dispatch2({ type: "BOOKINIT", bddata: initBookData });
   };
 
@@ -338,7 +287,6 @@ function App() {
       bdiaryId: bdiaryId,
       id: bdiaryId,
     };
-    console.log("testid확인", id);
 
     try {
       const userRef = doc(db, "booklist", `${id}`);
@@ -346,7 +294,7 @@ function App() {
       await setDoc(doc(userRef, "bookdiaries", `${bdiaryId}`), {
         bdiaryTitle: bdiaryTitle,
         bdiaryContent: bdiaryContent,
-        bdiaryDate: bdiaryDate,
+        bdiaryDate: created_date,
         bdiaryId: bdiaryId,
         id: bdiaryId,
       });
@@ -380,10 +328,8 @@ function App() {
           bidaryDate: bdiaryDate,
         },
       });
-      console.log("onTitleEdit실행!!!!!!!!!!");
-      console.log("id값!!!!!!!!!!", id, "targetId", targetId);
       const userDoc = doc(db, `booklist/${id}/bookdiaries`, `${targetId}`);
-      console.log("newbooknameRef", userDoc);
+      // console.log("newbooknameRef", userDoc);
       await updateDoc(userDoc, {
         id: targetId,
         bdiaryTitle: bdiaryTitle,
@@ -392,24 +338,6 @@ function App() {
     },
     []
   );
-
-  // const onNameEdit = useCallback(async (targetId, name) => {
-  //   dispatch3({
-  //     type: "NAMECHANGE",
-  //     udata: {
-  //       id: targetId,
-  //       name,
-  //     },
-  //   });
-  //   console.log("onNameEdit 실행");
-  //   console.log("onNameEdit 실행", name);
-
-  //   const newUsernameRef = doc(db, "user", user.email);
-  //   console.log(newUsernameRef);
-  //   await updateDoc(newUsernameRef, {
-  //     name: name,
-  //   });
-  // }, []);
 
   return (
     <userContext.Provider value={{ udata }}>
@@ -456,7 +384,6 @@ function App() {
                 </Routes>
               ) : (
                 <Routes>
-                  {/* <Route Route path="/" element={<Loading />} /> */}
                   <Route path="/" element={<Main />} />
                   <Route path="/login" element={<Userlogin />} />
                   <Route path="/register" element={<Register />} />

@@ -20,7 +20,11 @@ const BookSearch = () => {
 
   return (
     <div>
-      <input type="text" placeholder="검색" onChange={onChangeBookname}></input>
+      <input
+        type="text"
+        placeholder="책이름을 입력하세요"
+        onChange={onChangeBookname}
+      ></input>
       <button onClick={findBook}>확인버튼</button>
       {inBook.map((it) => (
         <BookList key={it.id} id={it.id} searchBook={[it]} />

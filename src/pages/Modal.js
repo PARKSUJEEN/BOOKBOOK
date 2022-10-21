@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Edit from "./Edit";
-import "./ModalTest.css";
+import "./Modal.css";
 
-const ModalTest = ({ modalOption }) => {
+const Modal = ({ modalOption }) => {
   return (
     <>
       {modalOption?.show && (
@@ -19,11 +18,6 @@ const ModalTest = ({ modalOption }) => {
               </button>
             </header>
             {modalOption?.element}
-
-            {/* <div className="buttonbox">
-              <button onClick={() => modalOption.onSubmit()}>확인</button>
-              <button onClick={() => modalOption.onClose()}>닫기</button>
-            </div> */}
           </section>
         </div>
       )}
@@ -31,4 +25,4 @@ const ModalTest = ({ modalOption }) => {
   );
 };
 
-export default ModalTest;
+export default Modal;

@@ -1,35 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { BookDispatchContext, BookStateContext } from "../App";
-import BookSearch from "../pages/BookSearch";
+import { BookStateContext } from "../App";
 import Loading from "../pages/Loading";
+import NullPage from "../pages/NullPage";
+import Pagination from "../pages/Pagination";
 import BookItem from "./BookItem";
 
 const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
+  const [bookname, setBookname] = useState("");
   const [findBook, setFindBook] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(9);
+  const [page, setPage] = useState(1);
 
-  console.log("BOOKLIST, findBook", searchBook);
-  console.log(bookdata);
+  const offset = (page - 1) * limit;
 
   useEffect(() => {
     if (searchBook === undefined || searchBook === null) {
-      setFindBook(bookdata);
-      console.log("BOOKLIST, findBook2", findBook);
+      return setFindBook(bookdata);
     }
-  }, []);
+  }, [bookdata]);
 
-  const [bookname, setBookname] = useState("");
-  // const [inBook, setInBook] = useState([]);
   const onChangeBookname = (e) => {
     setBookname(e.currentTarget.value);
   };
+
   const data = useContext(BookStateContext);
+
   const findingBook = () => {
     const filteredBook = data.data.filter((it) => {
       return it.bookname.includes(bookname);
     });
+
     return setFindBook(filteredBook);
+  };
+
+  const sortDate = () => {
+    const compare = (a, b) => parseInt(b.date) - parseInt(a.date);
+    const sortedList = findBook.sort(compare);
+    return sortedList;
   };
 
   return (
@@ -38,7 +46,7 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
         <div className="search">
           <input
             type="text"
-            placeholder="검색"
+            placeholder="책이름"
             onChange={onChangeBookname}
           ></input>
         </div>
@@ -47,14 +55,39 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
         </div>
       </div>
       {loading ? <Loading /> : null}
-      <div>{/* <h2>BOOK LIST {originBookData.length}</h2> */}</div>
-      <div className="booklist_wrapper">
-        {findBook.map((it) => (
-          <div className="booklist_item" key={it.id}>
-            <BookItem key={it.id} id={it.id} {...it} bookcolor={it.bookcolor} />
+
+      {findBook.length === 0 ? (
+        <NullPage />
+      ) : (
+        <>
+          <div className="booklist_wrapper">
+            {sortDate()
+              .slice(offset, offset + limit)
+              .map((it) => (
+                <div className="booklist_item" key={it.id}>
+                  <BookItem
+                    key={it.id}
+                    id={it.id}
+                    {...it}
+                    bookdate={it.date}
+                    bookcolor={it.bookcolor}
+                  />
+                </div>
+              ))}
           </div>
-        ))}
-      </div>
+
+          {findBook.length > 9 ? (
+            <div>
+              <Pagination
+                total={sortDate().length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+              />
+            </div>
+          ) : null}
+        </>
+      )}
     </div>
   );
 };

@@ -12,22 +12,21 @@ const BookDiaryItem = ({
   const navigate = useNavigate();
 
   const goDetail = () => {
-    console.log("testid확인", testid);
-    console.log("godetail id확인", id);
-
     navigate(`/diary/${testid}/${id}/read`);
   };
+
+  const strDate = new Date(parseInt(bdiaryDate)).toLocaleString().slice(0, 21);
 
   return (
     <div className="BookDiaryItem">
       <div className="BookDiaryItem_wrap" onClick={goDetail}>
         <div className="title">
           <span>"</span>
-          {`${bdiaryTitle}`}
-          <span>"</span>
+          {`${bdiaryTitle}`.slice(0, 20)}
+          <span> "</span>
         </div>
-        <div className="date">{`${bdiaryDate}`.replace(/-/gi, ".")}</div>
-        <div className="content">{`${bdiaryContent}`.slice(0, 50)} ...</div>
+        <div className="date">{`${strDate}`.replace(/-/gi, ".")}</div>
+        <div className="content">{`${bdiaryContent}`.slice(0, 50)}</div>
       </div>
     </div>
   );

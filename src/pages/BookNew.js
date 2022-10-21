@@ -23,7 +23,7 @@ const BookNew = () => {
                 }}
               />
             }
-            headText={"새일기쓰기"}
+            headText={"NEW BOOK DIARY"}
           />
         </div>
         <div>

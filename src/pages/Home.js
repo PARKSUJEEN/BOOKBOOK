@@ -8,15 +8,13 @@ import MyHeader from "../components/MyHeader";
 import { BookStateContext, userContext } from "../App";
 import useModal from "./useModal";
 
-import ModalTest from "./ModalTest";
+import Modal from "./Modal";
 
 import New from "./New";
 import Setting from "./Setting";
-import BookSearch from "./BookSearch";
 
 const Home = () => {
   const { data } = useContext(BookStateContext);
-
   const [modalOption, showModal] = useModal();
 
   const onModal = useCallback(() => {
@@ -48,11 +46,7 @@ const Home = () => {
   }, [modalOption]);
 
   const udata = useContext(userContext);
-  const userData = useContext(userContext);
-
-  console.log("udata", udata.udata.name);
-  console.log("userdata", userData);
-
+  const bdata = useContext(BookStateContext);
   return (
     <div>
       <MyHeader
@@ -62,7 +56,7 @@ const Home = () => {
             onClick={onMenu}
           />
         }
-        headText={`${udata.udata.name}의 책장`}
+        headText={`${udata.udata.name}의 책장 [${bdata.data.length}]`}
         rightChild={
           <MyButton
             text={<span className="material-symbols-outlined">add_box</span>}
@@ -71,7 +65,7 @@ const Home = () => {
         }
       />
       {/* <BookSearch /> */}
-      <ModalTest modalOption={modalOption} />
+      <Modal modalOption={modalOption} />
       <BookList bookdata={data} />
     </div>
   );

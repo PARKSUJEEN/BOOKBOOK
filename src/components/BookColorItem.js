@@ -14,7 +14,6 @@ const BookColorItem = ({ onClick, isSelected, cid }) => {
           className={`bcolor_${cid}`}
           type="radio"
           name="bookcolor"
-          onClick={() => console.log(cid)}
         />
       </div>
     </div>

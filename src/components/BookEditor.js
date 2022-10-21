@@ -1,12 +1,9 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookDispatchContext, userContext } from "../App";
-import Home from "../pages/Home";
-import ModalTest from "../pages/ModalTest";
-import New from "../pages/New";
-import useModal from "../pages/useModal";
 
 import { colorList } from "../util/colorlist";
+import { getStringDateTime } from "../util/date";
 import BookColorItem from "./BookColorItem";
 
 const BookEditor = ({ isEdit, originData, onClose }) => {
@@ -14,7 +11,7 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
 
   const [bookname, setBookname] = useState("");
   const [bookColor, setBookColor] = useState(3);
-  const [bookdate, setBookdate] = useState(new Date());
+  const [bookdate, setBookdate] = useState(getStringDateTime(new Date()));
   const userData = useContext(userContext);
   const navigate = useNavigate();
 
@@ -24,27 +21,26 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
 
   const onChangeBookC = (id) => {
     setBookColor(id);
-    console.log(id);
   };
 
   const handleSubmit = () => {
     if (
       window.confirm(
-        isEdit ? "일기를 수정하시겠습니까?" : "새 일기를 작성하시겠습니까?"
+        isEdit ? "책 제목을 수정하시겠습니까?" : "새 책을 추가하시겠습니까?"
       )
     ) {
+      if (bookname.length < 1) {
+        alert("제목을 입력해주세요");
+        return;
+      }
       if (!isEdit) {
         onCreate(bookname, bookColor, bookdate);
         onClose();
-
-        console.log("생성됨~");
       } else {
         onEdit(originData.id, bookname, bookColor);
         navigate(-1);
       }
     }
-
-    alert("저장성공!");
   };
 
   useEffect(() => {
@@ -57,12 +53,17 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
   return (
     <div className="BookEditor">
       <div>
-        {/* <>{isEdit ? "수정하기" : "새 책장추가하기"}</> */}
         <section>
           <div>
             <h3>닉네임</h3>
             <input readOnly value={userData.udata.name} />
-            <p>변경을하고싶다면 여기를 클릭</p>
+            <p
+              onClick={() => {
+                window.location.href = "./name";
+              }}
+            >
+              변경을하고싶다면 여기를 클릭
+            </p>
           </div>
           <div className="input_box bookname">
             <h3>새 책의 이름</h3>

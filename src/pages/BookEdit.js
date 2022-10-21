@@ -21,10 +21,8 @@ const BookEdit = () => {
   }, []);
 
   useEffect(() => {
-    console.log("id>>>", id);
     if (initBookData.bddata.length >= 1) {
       const targetDiary = initBookData.bddata.find((it) => it.id === key);
-      console.log(targetDiary);
 
       if (targetDiary) {
         setOriginData(targetDiary);
@@ -50,7 +48,7 @@ const BookEdit = () => {
               }
             />
           }
-          headText={"기록"}
+          headText={"NEW BOOK"}
         />
       </div>
       {originData && (

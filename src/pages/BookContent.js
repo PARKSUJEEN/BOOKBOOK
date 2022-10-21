@@ -16,8 +16,6 @@ const BookContent = () => {
 
   const udata = useContext(userContext);
 
-  console.log("udata", udata.udata.name);
-
   useEffect(() => {
     onTitleGet(id);
   }, []);
@@ -44,6 +42,9 @@ const BookContent = () => {
   useEffect(() => {
     bdata();
   }, [id, initBookData.bddata]);
+  const strDate = new Date(parseInt(bookDiaryData.date))
+    .toLocaleString()
+    .slice(0, 21);
 
   return (
     <div className="BookContent">
@@ -63,7 +64,7 @@ const BookContent = () => {
 
         <div className="title">{`${bookDiaryData.title}`.slice(0, 40)}</div>
         <div className="userName">{udata.udata.name}</div>
-        <div className="date">{bookDiaryData.date}</div>
+        <div className="date">{strDate}</div>
         <div className="content">{bookDiaryData.content}</div>
 
         <div className="btn">
@@ -76,7 +77,7 @@ const BookContent = () => {
           </button>
           <button
             onClick={() => {
-              if (window.confirm(`${key}번째 일기를 삭제할끼니?`)) {
+              if (window.confirm("정말 기록을 삭제하실건가요?")) {
                 onTitleRemove(id, key);
                 navigate(-1, { replace: true });
               }

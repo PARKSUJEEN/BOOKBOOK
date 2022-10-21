@@ -15,7 +15,6 @@ const Edit = () => {
   useEffect(() => {
     if (bookdata.data.length >= 1) {
       const targetDiary = bookdata.data.find((it) => it.id === id);
-      console.log("targetDiary", targetDiary);
       if (targetDiary) {
         setOriginData(targetDiary);
       } else {

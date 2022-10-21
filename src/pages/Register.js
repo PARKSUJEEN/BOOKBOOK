@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../assets/fbase";
 import MyHeader from "../components/MyHeader";
@@ -12,8 +12,6 @@ import {
   getDocs,
   setDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
-import styled from "styled-components";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -28,37 +26,9 @@ const Register = () => {
   const [isEmail, setIsEmail] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  const [emailMessage, setEmailMessage] = useState("");
-
-  const [lastButton, setLastBtutton] = useState(true);
-
-  const onEmailhandler = useCallback(async (e, email) => {
-    const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    const emailCurrent = e.target.value;
-    setEmail(emailCurrent);
-    setEmailMessage("");
-    if (!emailRegex.test(emailCurrent)) {
-      setEmailMessage("이메일 형식이 틀렸어요! 다시 확인해주세요 ㅜ ㅜ");
-      setIsEmail(false);
-      console.log(isEmail);
-    } else {
-      setEmailMessage("올바른 이메일 형식이에요 : )");
-      const docRef = doc(db, "user", `${emailCurrent}`);
-      console.log(emailCurrent);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-        setInputemail("중복되는 email이 존재합니다");
-        console.log(isEmail);
-      } else {
-        console.log("No such document!");
-        setInputemail("사용가능");
-        console.log(isEmail);
-        setIsEmail(true);
-      }
-    }
-  }, []);
+  const onEmailhandler = (e) => {
+    setEmail(e.currentTarget.value);
+  };
 
   const onPasswordhandler = (e) => {
     setPassword(e.currentTarget.value);
@@ -68,6 +38,29 @@ const Register = () => {
   const onNamehandler = (e) => {
     setName(e.currentTarget.value);
     handleCheck(e.currentTarget.value);
+  };
+
+  const email_check = (email) => {
+    let reg =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+    return reg.test(email);
+  };
+
+  const emailCheck = async () => {
+    if (!email_check(email)) {
+      setInputemail("이메일 형식에 맞게 입력해주세요");
+      return false;
+    }
+
+    const docRef = doc(db, "user", `${email}`);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setInputemail("중복되는 이메일이 존재합니다");
+    } else {
+      setInputemail("사용가능한 이메일입니다.");
+      setIsEmail(true);
+    }
   };
 
   const inputFocus = useRef(null);
@@ -94,11 +87,14 @@ const Register = () => {
   };
 
   const register = async (e) => {
-    e.preventDefault();
     if (isEmail && isPassword && isName) {
       console.log(isEmail, isPassword, isName);
       try {
-        const user = await createUserWithEmailAndPassword(auth, email, password)
+        const registerUser = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
           .then((userCredential) => {
             const user = userCredential.user;
             const docRef = setDoc(doc(db, "user", `${email}`), {
@@ -107,7 +103,6 @@ const Register = () => {
               name: name,
               uid: user.uid,
             });
-            console.log("회원가입완료 - > 여기서 user가 auth로 넘어가는건가?");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -117,15 +112,17 @@ const Register = () => {
             console.log(error.message);
           });
 
-        alert(`${name}님 회원가입 성공`);
-        navigate("/login");
+        alert(`${name}님 회원가입되었습니다.`);
+        e.preventDefault();
+
+        navigate("/", { replace: true });
       } catch (error) {
         console.log(error.message);
         alert(error.message);
-        // navigate("/login");
+        navigate("/login");
       }
     } else {
-      alert("다시입력해주세요");
+      alert("다시 입력 해주세요");
     }
   };
 
@@ -149,7 +146,7 @@ const Register = () => {
         />
       </div>
       <div className="Register_wrap">
-        <div className="Register inputname">
+        <div className="">
           {/* <label>이름</label> */}
           <input
             placeholder="닉네임(3-10자)"
@@ -159,7 +156,7 @@ const Register = () => {
             ref={inputFocus}
           />
         </div>
-        <div>{inputname}</div>
+        <div className="Register inputInfo">{inputname}</div>
         <div className="Register inputemail">
           {/* <label>이메일</label> */}
           <input
@@ -169,10 +166,10 @@ const Register = () => {
             onChange={onEmailhandler}
           />
         </div>
-        {/* <button className="emailtest" onClick={checkEmail}>
-          중복검사하기
-        </button> */}
-        <div>{isEmail ? inputemail : emailMessage}</div>
+        <div className="Register emailtest">
+          <button onClick={emailCheck}>중복검사하기</button>
+        </div>
+        <div className="Register inputInfo">{inputemail}</div>
         <div className="Register inputpassword">
           {/* <label>비밀번호</label> */}
           <input
@@ -182,20 +179,15 @@ const Register = () => {
             onChange={onPasswordhandler}
           />
         </div>
-        <div>{inputpass}</div>
-        <div>
+        <div className="Register inputInfo">{inputpass}</div>
+        <div className="Register info">
           <p>
             계정 생성 시 개인정보수집방침 및 이용약관(마케팅 정보 수신 동의
             포함)에 동의하게 됩니다.
           </p>
         </div>
-
-        <div className="register_btn">
-          {lastButton ? (
-            <button onClick={register}>완료</button>
-          ) : (
-            <button onClick={register}>삐빅..</button>
-          )}
+        <div className="Register_btn">
+          <button onClick={register}>완료</button>
         </div>
       </div>
     </div>
