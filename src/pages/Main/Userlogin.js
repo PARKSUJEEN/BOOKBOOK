@@ -1,8 +1,8 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
 const Userlogin = () => {
   const [email, setEmail] = useState("");
@@ -16,13 +16,13 @@ const Userlogin = () => {
     if (email.length < 1) {
       emailInput.current.focus();
 
-      return;
+      return alert("이메일을 입력해주세요");
     }
 
     if (password.length < 1) {
       passwordInput.current.focus();
 
-      return;
+      return alert("비밀번호를 입력해주세요");
     }
 
     login();
@@ -41,6 +41,8 @@ const Userlogin = () => {
       } else if (error.message === "Firebase: Error (auth/user-not-found).") {
         alert("email을 찾을 수 없습니다.");
         setPassword("");
+      } else if (error.message === "Firebase: Error (auth/invalid-email).") {
+        alert("잘못된 형식의 이메일입니다. 재입력 해주세요.");
       } else {
         alert(error);
       }

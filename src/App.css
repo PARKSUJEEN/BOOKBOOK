@@ -24,11 +24,9 @@ body {
 @media (min-width : 650px){ 
   .App {
   width: 640px;
+
   }
 
-  
-
-  
   
 
 }
@@ -36,20 +34,52 @@ body {
 @media (max-width: 650px){
   .App {
     width: 90vw;
+    
   }
 
+  /* BookItem */
 
 
   .BookItem .BookItem_wrap {
   
     display:flex; 
     justify-content: center;
-    
-   
   
   }
+  .BookDiaryItem .BookDiaryItem_wrap{
+  
 
+    
+  }
+  .BookDiaryItem .BookDiaryItem_wrap .title h3{
+ 
+    font-size: 20px;
+    margin-left: 8px;
+   }
 
+   .BookDiaryItem .BookDiaryItem_wrap .date{
+  
+    font-size: 9px;
+    margin-left: 11px;
+   }
+
+   .BookDiaryItem .BookDiaryItem_wrap .content{
+   
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 18px;
+   }
+
+   .BookDiaryItem >div{
+
+    margin-bottom: 10px;
+   }
+   /* Register */
+
+   .Register_wrap .info {
+    font-size: 5px;
+
+  }
 
 }
 
@@ -68,7 +98,7 @@ body {
 
 /* Main */
 .Main {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: #ffffff;
 }
 
@@ -81,7 +111,10 @@ body {
 
 .maininfo_wrap {
 
-  margin: 100px;
+  /* margin: 100px; */
+  margin-top:50px;
+  margin-left: 50px;
+  margin-right: 50px;
   text-align: center;
 }
 
@@ -117,6 +150,7 @@ color: black;
 
   align-items: center;
   height: 70px;
+  margin-bottom: 10px;
 
 }
 
@@ -131,7 +165,7 @@ color: black;
 
 
   font-weight: 300;
-  font-size: 40px;
+  font-size: 2em;
   
   border-radius: 3px;
 
@@ -149,37 +183,39 @@ color: black;
   
 }
 
+/* MyButton */
+
 .MyButton {
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  
- 
-  padding: 15px;
-  font-size: 22px;
-  white-space: nowrap;
-  background-color: #8d5c24;
+    cursor: pointer;
+    border: none;
+
+    white-space: nowrap;
+    background-color: #8d5c24;
 
 }
-
-
-.MyButton:HOVER{
-
-  background-color: #885e2e;
-
-}
-
-
 
 
 .MyButton span {
   font-size: 30px;
-  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+
 
 }
+
+.MyButton span:HOVER {
+  color: #8d5c24;
+  background-color: #fff;
+
+
+
+}
+
 .bookbook_Home {
   align-items: center;
 }
+
+/* MyHeader */
 
 header {
   background-color: #8d5c24;
@@ -220,17 +256,14 @@ header .head_text {
 header .head_btn_left {
   width: 25%;
   justify-content: start;
-  margin-left: 10px;
-
-
+  margin-left: 20px;
 
 }
 
 header .head_btn_right  {
   width: 25%;
   justify-content: end;
-  margin-right: 10px;
-
+  margin-right: 20px;
  
 }
 
@@ -415,23 +448,23 @@ margin-left: 280px;
 }
 
 .bcolor_1 {
-  background-color: #d8b976;
+  background-color: #f3d696;
  
 }
 
 .bcolor_1:checked {
   background-color: #ffffff;
-  border: 5px solid #d8b976;
+  border: 5px solid #f3d696;
 }
 
 .bcolor_2 {
-  background-color: #666B29;
+  background-color: #1a8e21;
 
 }
 
 .bcolor_2:checked  {
   background-color: #ffffff;
-  border: 5px solid #666B29;
+  border: 5px solid #1a8e21;
 }
 
 .bcolor_3 {
@@ -457,19 +490,19 @@ margin-left: 280px;
   border: 5px solid #F6eee3;
 }
 .bcolor_6 {
-  background-color: #98a5d8;
+  background-color: #e4871b;
 }
 
 .bcolor_6:checked {
   background-color: #ffffff;
-  border: 5px solid #98a5d8;
+  border: 5px solid #e4871b;
 }
 .bcolor_7 {
   background-color: #1f3176;
 }
 
 .bcolor_7:checked {
-  background-color: #ffffff;
+  background-color: #FBF5E9;
   border: 5px solid #1f3176;
 }
 
@@ -479,7 +512,7 @@ margin-left: 280px;
 }
 
 .bcolor_8:checked {
-  background-color: #ffffff;
+  background-color: #FBF5E9;
   border: 5px solid #3c1119;
 }
 
@@ -539,6 +572,7 @@ margin-left: 280px;
 .BookList h2{
   text-align: center;
   color: #703d13;
+
   
 }
 
@@ -786,9 +820,8 @@ background-color:  #8d5c24;
  }
 
  .Register_wrap .info {
-  font-size: 12px;
+  font-size: 0.5em;
   justify-content: center;
-
 }
 
 .Register_wrap input {
@@ -811,7 +844,6 @@ background-color:  #8d5c24;
 .Register_btn button{
 
   cursor: pointer;
-  
   border: none;
   background-color: #8d5c24;
   color: white;
@@ -931,54 +963,73 @@ background-color:  #8d5c24;
 /* BookDiaryItem */
 
 .BookDiaryItem {
-
- 
   align-items: center;
   width: 100%;
-
- 
-  
   background-color: #ffffff;
 }
 
 .BookDiaryItem >div{
-
  margin-bottom: 10px;
 }
 
 .BookDiaryItem_wrap{
+  
   border: 3px solid #a5a5a5;
-  padding: 20px;
+  border-radius: 5px;
+
   margin-left: 20px;
   margin-right: 20px;
+
+ 
+
+ 
+}
+
+
+
+.BookDiaryItem_wrap .title{
+
+ 
+  margin-top: -10px;
+
+  
+  
+}
+
+.BookDiaryItem_wrap .title h3{
+  color: #544b49;
+  font-size: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+
+  overflow: hidden;  
+  /* 잘리는부분 ...으로 */
+  text-overflow: ellipsis;
+  /* 아래줄로 내려가는 것 막기 */
+  white-space: nowrap; 		
+  word-break:break-all;
   
 }
 
 
 
-.BookDiaryItem_wrap .title {
-  color: #000000;
-  font-size: 30px;
-  padding: 10px;
-  white-space: nowrap; 		
-  word-break:break-all;
-}
-
-.BookDiaryItem_wrap .title span{
-font-size: 40px;
-font-family: 'Montagu Slab';
-font-weight: 700;
-padding-right: 10px;
-
-}
-
 .BookDiaryItem_wrap .date {
-  padding: 10px;
+  margin-left: 15px;
+  margin-top: -20px;
+  margin-bottom: 10px;
   font-size: 13px;
-  color:#5a5a5a
+  color:#5a5a5a;
 }
 .BookDiaryItem_wrap .content {
-  padding: 10px;
+  margin-left: 15px;
+  margin-bottom:20px;
+  overflow: hidden;  
+  /* 잘리는부분 ...으로 */
+  text-overflow: ellipsis;
+  /* 아래줄로 내려가는 것 막기 */
+  white-space: nowrap; 		
+  word-break:break-all;
   
 }
 
@@ -996,83 +1047,88 @@ padding-right: 10px;
 }
 
 .BookContent .BookContent_wrap {
- 
-  margin-bottom: 20px;
 
-  
-  
-  
-}
-
-.BookContent_wrap .bookname{
-  font-size: 12px;
-  margin-bottom: 10px;
-  
+    margin-bottom: 20px;
+    padding: 20px;
 
 }
 
-.BookContent_wrap .title{
-  font-size: 30px;
-  /* text-align: center; */
-  /* padding-left: 20px; */
-  margin-bottom: 20px;
+
+.BookContent_wrap .bookname {
+    font-size: 12px;
+    margin-bottom: 10px;
+
+}
+
+
+.BookContent_wrap .title {
+    font-size: 30px;
+    /* text-align: center; */
+    /* padding-left: 20px; */
+    margin-bottom: 20px;
 }
 
 
 
-.BookContent_wrap .title span{
-  font-size: 80px;
-  font-family: 'Montagu Slab';
-  font-weight: 700;
-  padding-right: 10px;
-  }
-
-.BookContent_wrap .content{
-
-  min-width: 90%;
-  min-height: 200px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-
-  word-break: break-all;
-  line-height: 1.6;
-  
+.BookContent_wrap .title span {
+    font-size: 80px;
+    font-family: 'Montagu Slab';
+    font-weight: 700;
+    padding-right: 10px;
 }
 
-.BookContent_wrap .date{
-  color: #a4a4a4;
-  font-size: 10px;
-  border-bottom: 1px solid #a4a4a4;
-  padding-bottom: 25px;
+
+.BookContent_wrap .content {
+
+    min-width: 90%;
+    min-height: 200px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+
+    word-break: break-all;
+    line-height: 1.6;
 
 }
 
-.BookContent_wrap .userName{
-  color: #a4a4a4;
 
-  font-size: 14px;
- }
-
-.BookContent_wrap .btn{
-  text-align: center;
+.BookContent_wrap .date {
+    color: #a4a4a4;
+    font-size: 10px;
+    border-bottom: 1px solid #a4a4a4;
+    padding-bottom: 25px;
 
 }
 
-.BookContent_wrap button{ 
-  cursor: pointer;
- align-items: center;
- border: none;
- background-color:#8d5c24;
- border-radius: 5px;
- width: 100px;
- height:50px;
- margin-left: 20px;
- margin-right: 20px;
- color: white;
- font-size: 18px;
- font-family: 'Noto Sans KR';
+
+.BookContent_wrap .userName {
+    color: #a4a4a4;
+
+    font-size: 14px;
+}
+
+
+.BookContent_wrap .btn {
+    text-align: center;
 
 }
+
+
+.BookContent_wrap button {
+    cursor: pointer;
+    align-items: center;
+    border: none;
+    background-color: #8d5c24;
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+    font-size: 18px;
+    font-family: 'Noto Sans KR';
+
+}
+
 
 /* BookDiaryEdit */
 
@@ -1081,232 +1137,235 @@ padding-right: 10px;
 }
 
 .BookDiaryEdit_wrap {
-width: 100%;
-min-height: 100vh;
-margin-top: 50px;
-font-family: 'Noto Sans KR';
-white-space: nowrap;
- /* display: flex;
- justify-content: center; */
- text-align: center;
- 
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 50px;
+    font-family: 'Noto Sans KR';
+    white-space: nowrap;
+    text-align: center;
 
 }
 
-.BookDiaryEdit_wrap >div{
-  margin-bottom: 20px;
+
+.BookDiaryEdit_wrap > div {
+    margin-bottom: 20px;
 }
 
 
-.BookDiaryEdit_wrap input{
 
-  /* display: flex; */
-  justify-content: center;
-  border: 1px solid #8d5c24;
-  border-radius: 3px;
-  /* margin-left: 30px;
+.BookDiaryEdit_wrap input {
+
+    /* display: flex; */
+    justify-content: center;
+    border: 1px solid #8d5c24;
+    border-radius: 3px;
+    /* margin-left: 30px;
   margin-right: 20px; */
-  
 
-  
 }
 
-.BookDiaryEdit_wrap textarea{
-  justify-content: center;
-  border: 1px solid #8d5c24;
-  border-radius: 3px;
-  /* margin-left: 30px; */
 
-  width: 90%;
-  height: 300px;
+.BookDiaryEdit_wrap textarea {
+    justify-content: center;
+    border: 1px solid #8d5c24;
+    border-radius: 3px;
+    /* margin-left: 30px; */
 
-  
+    width: 90%;
+    height: 300px;
+
 }
 
-.BookDiaryEdit_wrap .input_date{
- 
-  text-align: center;
-  border: none;
-  border-radius: 5px;
-  background-color: #ececec;
 
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+.BookDiaryEdit_wrap .input_date {
 
-  font-family: 'Noto Sans KR';
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: #ececec;
 
+    padding: 10px 20px;
 
-  cursor: pointer;
+    font-family: 'Noto Sans KR';
+
+    cursor: pointer;
 }
+
 
 
 .inputdate_wrap{
   text-align: center;
 }
 
-.BookDiaryEdit_wrap .input_title{
+.BookDiaryEdit_wrap .input_title {
 
-  box-sizing: border-box;
-  height: 50px;
-  padding: 10px;
-  width: 90%;
-  font-size: 15px;
+    box-sizing: border-box;
+    height: 50px;
+    padding: 10px;
+    width: 90%;
+    font-size: 15px;
 }
 
-.input_content{
-  font-family: 'Noto Sans KR';
 
-  font-size: 14px;
-  box-sizing: border-box;
-  
-  min-height: 200px;
-  /* 가로로 늘어나는 것을 방지 */
-  resize: vertical; 
+.input_content {
+    font-family: 'Noto Sans KR';
 
-  border: none;
-  border-radius: 5px;
-  padding-left: 10px;
-  padding-top: 10px;
-  
-}
+    font-size: 14px;
+    box-sizing: border-box;
 
-.BookDiaryEdit_wrap .btn{ 
-  text-align: center;
-}
+    min-height: 200px;
+    /* 가로로 늘어나는 것을 방지 */
+    resize: vertical;
 
-.BookDiaryEdit_wrap button{ 
-
-cursor: pointer;
-align-items: center;
- border: none;
- background-color:#8d5c24;
- border-radius: 5px;
- width: 130px;
- height:60px;
-
- margin-left:20px;
- 
- color: white;
- font-size: 18px;
- font-family: 'Noto Sans KR';
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
 
 }
+
+
+.BookDiaryEdit_wrap .btn {
+    text-align: center;
+}
+
+
+.BookDiaryEdit_wrap button {
+
+    cursor: pointer;
+    align-items: center;
+    border: none;
+    background-color: #8d5c24;
+    border-radius: 5px;
+    width: 130px;
+    height: 60px;
+
+    margin-left: 20px;
+
+    color: white;
+    font-size: 18px;
+    font-family: 'Noto Sans KR';
+
+}
+
 
 /* Name */
 
 .Name {
-
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
-.Name div{
-  display: flex;
-   align-items: center;
-  /* margin-left: 20px; */
-  margin-top: 10px;
-  
+
+.Name div {
+    display: flex;
+    align-items: center;
+    /* margin-left: 20px; */
+    margin-top: 10px;
 
 }
+
 
 .Name input {
-  border: 1px solid #8d5c24;
-  border-radius: 3px;
-  width: 90%;
-  height: 25px;
-  margin-left: 20px;
-  padding: 10px;
+    border: 1px solid #8d5c24;
+    border-radius: 3px;
+    width: 90%;
+    height: 25px;
+    margin-left: 20px;
+    padding: 10px;
 }
 
-.Name label{
-  font-size: 20px;
-  margin-left: 20px;
+
+.Name label {
+    font-size: 20px;
+    margin-left: 20px;
 }
+
 
 .Name .Name_info {
-  font-size: 12px;
-  color: #5a5a5a;
-  margin-left: 20px;
+    font-size: 12px;
+    color: #5a5a5a;
+    margin-left: 20px;
 }
 
-.Name .Name_btn{
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+.Name .Name_btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 
 }
 
 .Name button {
-  border: none;
-  color: #ffffff;
-  background-color: #8d5c24;
-  width: 90%;
-  height: 40px;
-  font-size: 20px;
-  border-radius: 5px;
-  
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #8d5c24;
+    width: 90%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 5px;
+
 }
+
 
 /* Pagination */
 
 .Pagination {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
+
 .Pagination button {
-  margin-left: 10px;
-  margin-right: 10px;
-  cursor: pointer;
-  border: none;
-  border-radius: 50%;
-  color: #ffffff;
-  background-color: #703d13;
-  width: 40px;
-  height: 30px;
-  padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: #703d13;
+    width: 40px;
+    height: 30px;
+    padding: 5px;
 }
 
 /* NullPage */
 
 .NullPage {
-  
 
-  border: 5px dotted #8d5c24;
-  display: flex;
-  justify-content: center;
+    border: 5px dotted #8d5c24;
+    display: flex;
+    justify-content: center;
 
+    width: 40%;
+    padding: 40px;
+    border-radius: 5em;
+    margin: 50px auto auto;
 
-  width: 40%;
-  padding: 40px;
-  border-radius: 5em;
-  margin: auto;
-  margin-top: 100px;
-
-  
-  
 }
+
 
 .NullPage_wrap {
 
-  justify-content: center;
-  
+    justify-content: center;
 
 }
+
 
 .NullPage .bear {
 
-  text-align: center;
-  font-size: 80px;
-  color:#92714b;
+    text-align: center;
+    font-size: 80px;
+    color: #92714b;
+    
 }
+
 
 
 
 .NullPage .info {
-  text-align: center;
-  color:#92714b;
-  
-
+    text-align: center;
+    color: #92714b;
+    white-space: nowrap; 		
+    word-break:break-all;
 }
+

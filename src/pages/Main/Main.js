@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
 const Main = () => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BookDispatchContext, BookStateContext } from "../../App";
-import Pagination from "../../pages/Pagination";
+import Pagination from "../../pages/Book/Pagination";
 
 import BookDiaryItem from "./BookDiaryItem";
 
-const BookDiaryList = ({ testid }) => {
+const BookDiaryList = ({ bookid }) => {
   const [namedata, setNamedata] = useState("");
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(9);
@@ -21,14 +21,14 @@ const BookDiaryList = ({ testid }) => {
   };
 
   useEffect(() => {
-    onTitleGet(testid);
+    onTitleGet(bookid);
   }, []);
 
   return (
     <div className="BookDiaryList">
       <div className="BookDiaryList_wrap">
         {sortDate().map((it) => (
-          <BookDiaryItem key={it.id} id={it.id} testid={testid} {...it} />
+          <BookDiaryItem key={it.bdiaryId} id={it.id} bookid={bookid} {...it} />
         ))}
       </div>
       {initBookData.bddata.length > 9 ? (

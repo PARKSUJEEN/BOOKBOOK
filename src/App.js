@@ -1,13 +1,12 @@
 import "./App.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Setting from "./pages/Setting";
-import New from "./pages/New";
-import Userlogin from "./pages/Userlogin";
-import Register from "./pages/Register";
-import Edit from "./pages/Edit";
-import BookDiary from "./pages/BookDiary";
+import Setting from "./pages/Main/Setting";
+import New from "./pages/Book/New";
+import Userlogin from "./pages/Main/Userlogin";
+import Register from "./pages/Main/Register";
+import Edit from "./pages/Book/Edit";
+import BookDiary from "./pages/Book/BookDiary";
 
 import React, { useCallback, useEffect, useReducer, useState } from "react";
 import {
@@ -19,15 +18,15 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "./assets/fbase";
-import Home from "./pages/Home";
-import BookEdit from "./pages/BookEdit";
-import BookContent from "./pages/BookContent";
-import BookNew from "./pages/BookNew";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import Main from "./pages/Main";
-import Loading from "./pages/Loading";
-import Name from "./pages/Name";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Loading from "./pages/Main/Loading";
+import BookNew from "./pages/BookDiary/BookNew";
+import BookContent from "./pages/BookDiary/BookContent";
+import Name from "./pages/Main/Name";
+import BookEdit from "./pages/BookDiary/BookEdit";
+import Home from "./pages/Book/Home";
+import Main from "./pages/Main/Main";
 
 const userreducer = (state2, action) => {
   let newState2 = [];
@@ -225,7 +224,7 @@ function App() {
     } catch (e) {
       console.log(e);
     } finally {
-      console.log("firestore data삭제완");
+      alert("책이 삭제되었습니다.");
     }
   };
 
@@ -296,7 +295,7 @@ function App() {
         bdiaryContent: bdiaryContent,
         bdiaryDate: created_date,
         bdiaryId: bdiaryId,
-        id: bdiaryId,
+        id: id,
       });
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -305,6 +304,7 @@ function App() {
 
   const onTitleRemove = async (id, targetId) => {
     dispatch2({ type: "BOOKREMOVE", targetId });
+    console.log(id, targetId);
 
     const userDoc = doc(db, `booklist/${id}/bookdiaries`, `${targetId}`);
     try {
@@ -313,12 +313,12 @@ function App() {
     } catch (e) {
       console.log(e);
     } finally {
-      console.log("firestore data삭제완");
+      alert("책의기록이 삭제되었습니다.");
     }
   };
 
   const onTitleEdit = useCallback(
-    async (targetId, bdiaryTitle, bdiaryContent, bdiaryDate, id, testid) => {
+    async (targetId, bdiaryTitle, bdiaryContent, bdiaryDate, bdiaryId) => {
       dispatch2({
         type: "BOOKEDIT",
         data: {
@@ -328,8 +328,12 @@ function App() {
           bidaryDate: bdiaryDate,
         },
       });
-      const userDoc = doc(db, `booklist/${id}/bookdiaries`, `${targetId}`);
-      // console.log("newbooknameRef", userDoc);
+      const userDoc = doc(
+        db,
+        `booklist/${targetId}/bookdiaries`,
+        `${bdiaryId}`
+      );
+
       await updateDoc(userDoc, {
         id: targetId,
         bdiaryTitle: bdiaryTitle,
@@ -359,11 +363,11 @@ function App() {
                 <Routes>
                   {loading ? (
                     <>
-                      <Route Route path="/" element={<Loading />} />
+                      <Route path="/" element={<Loading />} />
                     </>
                   ) : null}
 
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={isLoggedIn ? <Home /> : <Main />} />
                   <Route path="/home" element={<Home />} />
 
                   <Route path="/setting" element={<Setting />} />

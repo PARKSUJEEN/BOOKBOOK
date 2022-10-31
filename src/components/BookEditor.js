@@ -26,7 +26,7 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
   const handleSubmit = () => {
     if (
       window.confirm(
-        isEdit ? "책 제목을 수정하시겠습니까?" : "새 책을 추가하시겠습니까?"
+        isEdit ? "책을 수정하시겠습니까?" : "새 책을 추가하시겠습니까?"
       )
     ) {
       if (bookname.length < 1) {
@@ -38,7 +38,7 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
         onClose();
       } else {
         onEdit(originData.id, bookname, bookColor);
-        navigate(-1);
+        navigate(-1, { replace: true });
       }
     }
   };
@@ -46,6 +46,7 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
   useEffect(() => {
     if (isEdit) {
       setBookname(originData.bookname);
+      setBookColor(originData.bookcolor);
     } else {
     }
   }, [isEdit, originData]);
@@ -62,11 +63,11 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
                 window.location.href = "./name";
               }}
             >
-              변경을하고싶다면 여기를 클릭
+              변경을 하고싶다면 여기를 클릭
             </p>
           </div>
           <div className="input_box bookname">
-            <h3>새 책의 이름</h3>
+            <h3>책의 이름</h3>
             <input
               value={bookname}
               onChange={(e) => {
@@ -96,11 +97,11 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
       <div className="BookEditor_btn">
         {isEdit ? (
           <>
-            <button onClick={handleSubmit}>수정하기</button>
+            <button onClick={handleSubmit}>책 수정하기</button>
           </>
         ) : (
           <>
-            <button onClick={handleSubmit}>책장추가</button>
+            <button onClick={handleSubmit}>책 추가</button>
           </>
         )}
       </div>

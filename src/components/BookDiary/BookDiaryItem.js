@@ -6,13 +6,14 @@ const BookDiaryItem = ({
   bdiaryTitle,
   bdiaryContent,
   bdiaryDate,
+  bdiaryId,
   id,
-  testid,
+  bookid,
 }) => {
   const navigate = useNavigate();
 
   const goDetail = () => {
-    navigate(`/diary/${testid}/${id}/read`);
+    navigate(`/diary/${bookid}/${bdiaryId}/read`);
   };
 
   const strDate = new Date(parseInt(bdiaryDate)).toLocaleString().slice(0, 21);
@@ -21,12 +22,10 @@ const BookDiaryItem = ({
     <div className="BookDiaryItem">
       <div className="BookDiaryItem_wrap" onClick={goDetail}>
         <div className="title">
-          <span>"</span>
-          {`${bdiaryTitle}`.slice(0, 20)}
-          <span> "</span>
+          <h3> {`${bdiaryTitle}`}</h3>
         </div>
-        <div className="date">{`${strDate}`.replace(/-/gi, ".")}</div>
-        <div className="content">{`${bdiaryContent}`.slice(0, 50)}</div>
+        <div className="date">{`${strDate}`.padStart(2, "0")}</div>
+        <div className="content">{`${bdiaryContent}`}</div>
       </div>
     </div>
   );

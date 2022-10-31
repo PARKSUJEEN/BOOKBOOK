@@ -1,10 +1,10 @@
 import { doc, updateDoc } from "firebase/firestore";
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../App";
-import { db } from "../assets/fbase";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import { userContext } from "../../App";
+import { db } from "../../assets/fbase";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
 const Name = () => {
   const { udata } = useContext(userContext);
@@ -12,12 +12,12 @@ const Name = () => {
 
   const navigate = useNavigate();
 
-  const onChangeName = (e) => {
+  const onChangeName = useCallback((e) => {
     setName(e.target.value);
-  };
+  }, []);
 
   const nameSubmit = async () => {
-    if (name.length < 3 || name.length >= 10) {
+    if (name.length < 3 || name.length > 11) {
       alert("이름 규칙을 지켜주세요(´•᎑•`)♡ ");
       return;
     }
@@ -60,4 +60,4 @@ const Name = () => {
   );
 };
 
-export default Name;
+export default React.memo(Name);

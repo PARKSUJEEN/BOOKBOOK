@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BookStateContext } from "../App";
-import Loading from "../pages/Loading";
-import NullPage from "../pages/NullPage";
-import Pagination from "../pages/Pagination";
+import Pagination from "../pages/Book/Pagination";
+import Loading from "../pages/Main/Loading";
+import NullPage from "../pages/Main/NullPage";
 import BookItem from "./BookItem";
 
 const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
@@ -57,7 +57,9 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
       {loading ? <Loading /> : null}
 
       {findBook.length === 0 ? (
-        <NullPage />
+        <div className="booklist_wrapper">
+          <p>찾으시는책이 존재하지 않습니다.</p>
+        </div>
       ) : (
         <>
           <div className="booklist_wrapper">

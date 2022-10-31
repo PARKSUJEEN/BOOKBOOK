@@ -9,10 +9,11 @@ const NullPage = () => {
           {id === null ? (
             <>
               <label>୧ʕ•̀ᴥ•́ʔ୨</label>
+              <span>읽고 있는 책을 등록해주세요</span>
             </>
           ) : (
             <>
-              <label>ʕ·ᴥ·ʔ</label>
+              <label>🍀</label>
             </>
           )}
         </div>

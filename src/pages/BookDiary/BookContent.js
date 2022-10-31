@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BookDispatchContext, BookStateContext, userContext } from "../App";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
-import Loading from "./Loading";
+import { BookDispatchContext, BookStateContext, userContext } from "../../App";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
 const BookContent = () => {
   const [bookDiaryData, setBookDiaryData] = useState([]);
@@ -22,9 +21,9 @@ const BookContent = () => {
 
   const bdata = () => {
     initBookData.bddata.map((it) => {
-      if (it.id === key) {
+      if (it.bdiaryId === key) {
         setBookDiaryData({
-          key: it.id,
+          key: it.bdiaryId,
           title: it.bdiaryTitle,
           content: it.bdiaryContent,
           date: it.bdiaryDate,
@@ -42,6 +41,7 @@ const BookContent = () => {
   useEffect(() => {
     bdata();
   }, [id, initBookData.bddata]);
+
   const strDate = new Date(parseInt(bookDiaryData.date))
     .toLocaleString()
     .slice(0, 21);
@@ -52,7 +52,9 @@ const BookContent = () => {
         headText={`${bookName}`}
         leftChild={
           <MyButton
-            text="<"
+            text={
+              <span className="material-symbols-outlined">arrow_back_ios</span>
+            }
             onClick={() => {
               navigate(-1, { raplace: true });
             }}
@@ -62,7 +64,7 @@ const BookContent = () => {
       <div className="BookContent_wrap">
         <div className="bookname">{`${bookName}`}</div>
 
-        <div className="title">{`${bookDiaryData.title}`.slice(0, 40)}</div>
+        <div className="title">{`${bookDiaryData.title}`}</div>
         <div className="userName">{udata.udata.name}</div>
         <div className="date">{strDate}</div>
         <div className="content">{bookDiaryData.content}</div>

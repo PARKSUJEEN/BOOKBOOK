@@ -1,17 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../assets/fbase";
-import MyHeader from "../components/MyHeader";
-import MyButton from "../components/MyButton";
+import { auth, db } from "../../assets/fbase";
+import MyHeader from "../../components/MyHeader";
+import MyButton from "../../components/MyButton";
 import { useNavigate } from "react-router-dom";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -71,7 +64,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleCheck = async () => {
-    if (name.length < 3 || name.length >= 10) {
+    if (name.length <= 3 || name.length > 11) {
       setInputname("3-10자로 입력해주세요");
     } else {
       setInputname("사용할 수 있는 닉네임입니다");

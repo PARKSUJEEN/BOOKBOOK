@@ -22,14 +22,14 @@ const BookItem = ({ bookname, id, bookcolor, bookdate }) => {
           <div className="info">
             <span>{bookname}</span>
           </div>
-          <button
+          {/* <button
             onClick={() => {
               onRemove(id);
             }}
           >
             삭제
-          </button>
-          {/* <div>마지막 기록일 : {strDate} </div> */}
+          </button> */}
+          <div>{strDate.slice(0, 12)} </div>
         </div>
       </div>
     </div>

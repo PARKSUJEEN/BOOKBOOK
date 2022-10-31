@@ -4,16 +4,22 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import {
+  collection,
+  collectionGroup,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+  writeBatch,
+} from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
-import Name from "./Name";
-import useModal from "./useModal";
+import { db } from "../../assets/fbase";
 
-const Setting = ({ onClose }) => {
+const Setting = ({ onClose, data }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [modalOption, showModal] = useModal();
   const navigate = useNavigate();
 
   const onEditName = useCallback(() => {
@@ -32,24 +38,33 @@ const Setting = ({ onClose }) => {
   };
 
   const logout = useCallback(() => {
-    signOut(auth)
-      .then(() => {
-        onClose();
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (window.confirm(`정말 로그아웃 하실건가요?`)) {
+      signOut(auth)
+        .then(() => {
+          onClose();
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    return;
   }, []);
 
   const userDel = () => {
-    deleteUser(user)
-      .then(() => {
-        alert("탈퇴되었습니다.");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (
+      window.confirm(`정말 탈퇴 하실건가요? 책장의 모든 기록들이 사라집니다..`)
+    ) {
+      deleteUser(user)
+        .then(() => {
+          alert("탈퇴 되었습니다..");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    return;
   };
 
   useEffect(() => {

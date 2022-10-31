@@ -1,15 +1,14 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BookDispatchContext, BookStateContext } from "../App";
-import BookDiaryList from "../components/BookDiary/BookDiaryList";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import { BookDispatchContext, BookStateContext } from "../../App";
+import BookDiaryList from "../../components/BookDiary/BookDiaryList";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 import Edit from "./Edit";
-import Loading from "./Loading";
-import Modal from "./Modal";
-import NullPage from "./NullPage";
-import Pagination from "./Pagination";
-import useModal from "./useModal";
+import Loading from "../Main/Loading";
+import Modal from "../Main/Modal";
+import NullPage from "../Main/NullPage";
+import useModal from "../Main/useModal";
 
 const BookDiary = () => {
   const [bname, setBname] = useState("");
@@ -25,7 +24,7 @@ const BookDiary = () => {
   const onClick = useCallback(() => {
     showModal(
       true,
-      "책이름 수정하기",
+      "책 수정하기",
       () => console.log("모달 on"),
       null,
       <Edit />
@@ -44,7 +43,7 @@ const BookDiary = () => {
 
   return (
     <div className="Bookdiary">
-      {loading ? <Loading /> : null}
+      {/* {loading ? <Loading /> : null} */}
       <div>
         <MyHeader
           leftChild={
@@ -64,7 +63,7 @@ const BookDiary = () => {
       </div>
 
       <div className="BookDiary_wrap">
-        <NullPage />
+        {initData.bddata.length > 1 ? null : <NullPage />}
         <div className="BookDiary_btn">
           <button
             onClick={() => {
@@ -98,9 +97,7 @@ const BookDiary = () => {
           </button>
         </div>
         <div className="BookDiary_list">
-          <div>
-            <BookDiaryList testid={id} />
-          </div>
+          <div>{loading ? <Loading /> : <BookDiaryList bookid={id} />}</div>
         </div>
       </div>
     </div>

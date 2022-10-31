@@ -39,7 +39,13 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
       onTitleCreate(bdiaryTitle, bdiaryContent, bdiaryDate, bdiaryId, id);
       navigate(-1, { replace: true });
     } else {
-      onTitleEdit(originData.id, bdiaryTitle, bdiaryContent, bdiaryDate, id);
+      onTitleEdit(
+        originData.id,
+        bdiaryTitle,
+        bdiaryContent,
+        bdiaryDate,
+        originData.bdiaryId
+      );
       navigate(-1, { replace: true });
     }
   };
@@ -69,7 +75,7 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
             className="input_title"
             value={bdiaryTitle}
             onChange={onTitleChange}
-            placeholder={"오늘의 기록 제목"}
+            placeholder={"오늘의 책 읽기 기록 제목"}
           />
         </div>
         <div className="textareacontent_wrap">
@@ -77,7 +83,7 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
             className="input_content"
             value={bdiaryContent}
             onChange={onContentChange}
-            placeholder={"오늘의 기록 내용"}
+            placeholder={"오늘의 책 읽기 기록 내용"}
           />
         </div>
         <div className="btn">

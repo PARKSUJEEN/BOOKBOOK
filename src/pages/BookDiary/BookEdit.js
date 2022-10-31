@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BookDispatchContext, BookStateContext } from "../App";
-import BookDiaryEditor from "../components/BookDiary/BookDiaryEditor";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import { BookDispatchContext, BookStateContext } from "../../App";
+import BookDiaryEditor from "../../components/BookDiary/BookDiaryEditor";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
 const BookEdit = () => {
   const [originData, setOriginData] = useState();
@@ -22,7 +22,7 @@ const BookEdit = () => {
 
   useEffect(() => {
     if (initBookData.bddata.length >= 1) {
-      const targetDiary = initBookData.bddata.find((it) => it.id === key);
+      const targetDiary = initBookData.bddata.find((it) => it.bdiaryId === key);
 
       if (targetDiary) {
         setOriginData(targetDiary);
@@ -39,7 +39,7 @@ const BookEdit = () => {
           leftChild={
             <MyButton
               onClick={() => {
-                navigate(-1);
+                navigate(-1, { replace: true });
               }}
               text={
                 <span className="material-symbols-outlined">
@@ -48,11 +48,12 @@ const BookEdit = () => {
               }
             />
           }
-          headText={"NEW BOOK"}
+          // headText={`${originData.bookname}`}
+          headText={""}
         />
       </div>
       {originData && (
-        <BookDiaryEditor testid={id} isEdit={true} originData={originData} />
+        <BookDiaryEditor bookid={id} isEdit={true} originData={originData} />
       )}
     </div>
   );

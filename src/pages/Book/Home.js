@@ -1,17 +1,17 @@
 import React, { useCallback, useContext } from "react";
 
-import BookList from "../components/BookList";
+import BookList from "../../components/BookList";
 
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
-import { BookStateContext, userContext } from "../App";
-import useModal from "./useModal";
+import { BookStateContext, userContext } from "../../App";
+import useModal from "../Main/useModal";
 
-import Modal from "./Modal";
+import Modal from "../Main/Modal";
 
 import New from "./New";
-import Setting from "./Setting";
+import Setting from "../Main/Setting";
 
 const Home = () => {
   const { data } = useContext(BookStateContext);
@@ -38,6 +38,7 @@ const Home = () => {
       () => console.log("모달 on"),
       null,
       <Setting
+        data={data}
         onClose={() => {
           modalOption.onClose();
         }}

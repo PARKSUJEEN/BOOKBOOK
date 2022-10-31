@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import BookDiaryEditor from "../components/BookDiary/BookDiaryEditor";
-import MyButton from "../components/MyButton";
-import MyHeader from "../components/MyHeader";
+import BookDiaryEditor from "../../components/BookDiary/BookDiaryEditor";
+import MyButton from "../../components/MyButton";
+import MyHeader from "../../components/MyHeader";
 
 const BookNew = () => {
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ const BookNew = () => {
                   </span>
                 }
                 onClick={() => {
-                  navigate(-1);
+                  navigate(-1, { replace: true });
                 }}
               />
             }
-            headText={"NEW BOOK DIARY"}
+            headText={""}
           />
         </div>
         <div>

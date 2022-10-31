@@ -1,5 +1,4 @@
-import BookEditor from "../components/BookEditor";
-import Modal from "./Modal";
+import BookEditor from "../../components/BookEditor";
 
 const New = ({ onClose }) => {
   return (

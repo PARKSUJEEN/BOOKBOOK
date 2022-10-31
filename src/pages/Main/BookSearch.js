@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
-import { json } from "react-router-dom";
-import { BookStateContext } from "../App";
-import BookItem from "../components/BookItem";
-import BookList from "../components/BookList";
+import { BookStateContext } from "../../App";
+import BookList from "../../components/BookList";
 
 const BookSearch = () => {
   const [bookname, setBookname] = useState("");
@@ -22,7 +20,7 @@ const BookSearch = () => {
     <div>
       <input
         type="text"
-        placeholder="책이름을 입력하세요"
+        placeholder="책이름을 입력하세요."
         onChange={onChangeBookname}
       ></input>
       <button onClick={findBook}>확인버튼</button>
@@ -33,4 +31,4 @@ const BookSearch = () => {
   );
 };
 
-export default BookSearch;
+export default React.memo(BookSearch);

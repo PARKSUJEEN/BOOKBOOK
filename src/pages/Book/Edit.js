@@ -1,8 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BookStateContext } from "../App";
-import BookEditor from "../components/BookEditor";
-import useModal from "./useModal";
+import { BookStateContext } from "../../App";
+import BookEditor from "../../components/BookEditor";
 
 const Edit = () => {
   const [originData, setOriginData] = useState();
@@ -28,7 +27,7 @@ const Edit = () => {
       <div>
         {/* {id} 페이지 ~ .. */}
         {originData && (
-          <BookEditor isEdit={true} originData={originData} testid={id} />
+          <BookEditor isEdit={true} originData={originData} bookid={id} />
         )}
       </div>
     </div>
