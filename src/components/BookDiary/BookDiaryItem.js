@@ -16,19 +16,19 @@ const BookDiaryItem = ({
     navigate(`/diary/${bookid}/${bdiaryId}/read`);
   };
 
-  const strDate = new Date(parseInt(bdiaryDate)).toLocaleString().slice(0, 21);
+  const strDate = new Date(parseInt(bdiaryDate)).toLocaleString();
 
   return (
     <div className="BookDiaryItem">
       <div className="BookDiaryItem_wrap" onClick={goDetail}>
         <div className="title">
-          <h3> {`${bdiaryTitle}`}</h3>
+          <h3> {bdiaryTitle}</h3>
         </div>
-        <div className="date">{`${strDate}`.padStart(2, "0")}</div>
-        <div className="content">{`${bdiaryContent}`}</div>
+        <div className="date">{strDate.slice(0, strDate.length - 3)}</div>
+        <div className="content">{bdiaryContent}</div>
       </div>
     </div>
   );
 };
 
-export default BookDiaryItem;
+export default React.memo(BookDiaryItem);

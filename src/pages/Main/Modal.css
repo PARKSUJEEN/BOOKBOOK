@@ -1,5 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz,wght@16..144,700&family=Noto+Sans+KR:wght@100;300;400;500&family=Yeon+Sung&display=swap');
 
 
+@media (max-width: 650px){
+
+  .wrapper > section {
+    
+  }
+
+
+.wrapper .close {
+  top: 25px;
+
+
+}
+
+}
+
+/* modal */
 .wrapper {
   display: none;
   position: fixed;
@@ -12,6 +29,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+
 }
 
 .wrapper .background {
@@ -41,9 +59,12 @@
     /* 팝업이 열릴때 스르륵 열리는 효과 */
     animation: modal-show 0.3s;
     overflow: hidden;
+    
   }
 
   .wrapper > section > header {
+  font-family: 'Noto Sans KR';
+    font-size: 15px;
     position: relative;
     padding: 10px 10px 10px 10px;
     background-color: #8d5c24;
@@ -57,7 +78,7 @@
     position: absolute;
 
     top: 25px;
-    right: 15px;
+    right: 30px;
     width: 40px;
     height: 40px;
     font-size: 21px;
@@ -77,15 +98,17 @@
       margin-left: 20px;
     }
     
+
 .wrapper .contents {
+
     display: flex;
     justify-content: center;
+ 
     width: 300px;
-    
 
 }
 
-.content {
+.contents {
     margin:auto;
     align-items: center;
     /* 팝업이 열릴때 스르륵 열리는 효과 */

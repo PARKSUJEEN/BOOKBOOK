@@ -47,4 +47,4 @@ BookDiaryList.defaultProps = {
   initBookData: [],
 };
 
-export default BookDiaryList;
+export default React.memo(BookDiaryList);

@@ -37,6 +37,7 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
       setBdiaryDate(getStringDateTime(new Date()));
 
       onTitleCreate(bdiaryTitle, bdiaryContent, bdiaryDate, bdiaryId, id);
+
       navigate(-1, { replace: true });
     } else {
       onTitleEdit(
@@ -54,7 +55,6 @@ const BookDiaryEditor = ({ isEdit, originData }) => {
     if (isEdit) {
       setBdiaryTitle(originData.bdiaryTitle);
       setBdiaryContent(originData.bdiaryContent);
-    } else {
     }
   }, [isEdit, originData]);
 

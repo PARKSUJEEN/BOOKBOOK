@@ -1,8 +1,7 @@
 import "./App.css";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Setting from "./pages/Main/Setting";
-import New from "./pages/Book/New";
 import Userlogin from "./pages/Main/Userlogin";
 import Register from "./pages/Main/Register";
 import Edit from "./pages/Book/Edit";
@@ -146,7 +145,7 @@ function App() {
     });
   };
 
-  const getData = async (user) => {
+  const getData = useCallback(async (user) => {
     let initData = [];
     const querySnapshot = await getDocs(collection(db, "booklist"));
 
@@ -157,7 +156,7 @@ function App() {
     });
 
     dispatch({ type: "INIT", data: initData });
-  };
+  }, []);
 
   const getUser = async (user) => {
     const querySnapshot = await getDocs(collection(db, "user"));
@@ -185,12 +184,6 @@ function App() {
         date: new Date(bookdate).getTime(),
       },
     });
-    // const newBook = {
-    //   bookname,
-    //   id: dataId,
-    //   bookcolor: bookColor,
-    //   date: bookdate,
-    // };
 
     try {
       const docRef = await setDoc(doc(db, "booklist", dataId), {
@@ -200,21 +193,12 @@ function App() {
         date: new Date(bookdate).getTime(),
         user_uid: user.uid,
       });
-
-      console.log(
-        "dataId확인",
-        dataId,
-        "bookColor확인",
-        bookColor,
-        "bookdate",
-        bookdate
-      );
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   });
 
-  const onRemove = async (targetId) => {
+  const onRemove = useCallback(async (targetId) => {
     dispatch({ type: "REMOVE", targetId });
 
     const userDoc = doc(db, "booklist", targetId);
@@ -226,17 +210,20 @@ function App() {
     } finally {
       alert("책이 삭제되었습니다.");
     }
-  };
+  }, []);
 
   const onEdit = useCallback(async (targetId, bookname, bookcolor) => {
-    dispatch({
-      type: "EDIT",
-      data: {
-        id: targetId,
-        bookname,
-        bookcolor,
+    dispatch(
+      {
+        type: "EDIT",
+        data: {
+          id: targetId,
+          bookname,
+          bookcolor,
+        },
       },
-    });
+      []
+    );
 
     const newbooknameRef = doc(db, "booklist", targetId);
 
@@ -260,49 +247,39 @@ function App() {
     dispatch2({ type: "BOOKINIT", bddata: initBookData });
   };
 
-  const onTitleCreate = async (
-    bdiaryTitle,
-    bdiaryContent,
-    bdiaryDate,
-    bdiaryId,
-    id
-  ) => {
-    dispatch2({
-      type: "BOOKCREATE",
-      bddata: {
-        bdiaryTitle,
-        bdiaryContent,
-        bdiaryDate,
-        bdiaryId: bdiaryId,
-        id: bdiaryId,
-      },
-    });
-
-    const created_date = new Date().getTime();
-    const bookDiary = {
-      bdiaryTitle,
-      bdiaryContent,
-      created_date,
-      bdiaryId: bdiaryId,
-      id: bdiaryId,
-    };
-
-    try {
-      const userRef = doc(db, "booklist", `${id}`);
-
-      await setDoc(doc(userRef, "bookdiaries", `${bdiaryId}`), {
-        bdiaryTitle: bdiaryTitle,
-        bdiaryContent: bdiaryContent,
-        bdiaryDate: created_date,
-        bdiaryId: bdiaryId,
-        id: id,
+  const onTitleCreate = useCallback(
+    async (bdiaryTitle, bdiaryContent, bdiaryDate, bdiaryId, id) => {
+      dispatch2({
+        type: "BOOKCREATE",
+        bddata: {
+          bdiaryTitle,
+          bdiaryContent,
+          bdiaryDate,
+          bdiaryId: bdiaryId,
+          id: bdiaryId,
+        },
       });
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
 
-  const onTitleRemove = async (id, targetId) => {
+      const created_date = new Date().getTime();
+
+      try {
+        const userRef = doc(db, "booklist", `${id}`);
+
+        await setDoc(doc(userRef, "bookdiaries", `${bdiaryId}`), {
+          bdiaryTitle: bdiaryTitle,
+          bdiaryContent: bdiaryContent,
+          bdiaryDate: created_date,
+          bdiaryId: bdiaryId,
+          id: id,
+        });
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    },
+    []
+  );
+
+  const onTitleRemove = useCallback(async (id, targetId) => {
     dispatch2({ type: "BOOKREMOVE", targetId });
     console.log(id, targetId);
 
@@ -313,9 +290,9 @@ function App() {
     } catch (e) {
       console.log(e);
     } finally {
-      alert("책의기록이 삭제되었습니다.");
+      alert("책의 기록이 삭제되었습니다.");
     }
-  };
+  }, []);
 
   const onTitleEdit = useCallback(
     async (targetId, bdiaryTitle, bdiaryContent, bdiaryDate, bdiaryId) => {
@@ -359,40 +336,39 @@ function App() {
         >
           <BrowserRouter>
             <div className="App">
-              {isLoggedIn ? (
-                <Routes>
-                  {loading ? (
-                    <>
-                      <Route path="/" element={<Loading />} />
-                    </>
-                  ) : null}
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    isLoggedIn ? (
+                      <>{loading ? <Loading /> : <Home />}</>
+                    ) : (
+                      <Main />
+                    )
+                  }
+                />
 
-                  <Route path="/" element={isLoggedIn ? <Home /> : <Main />} />
-                  <Route path="/home" element={<Home />} />
+                <Route path="/home" element={<Home />} />
 
-                  <Route path="/setting" element={<Setting />} />
-                  <Route path="/diary/:id/edit" element={<Edit />} />
-                  <Route path="/diary/:id/new" element={<BookNew />} />
-                  <Route path="/diary/:id" element={<BookDiary />} />
-                  <Route
-                    path="/diary/:id/:key/read"
-                    element={<BookContent />}
-                  />
-                  <Route path="/name" element={<Name />} />
-
-                  <Route path="/login" element={<Userlogin />} />
-
-                  <Route path="/diary/:id/write" element={<BookEdit />} />
-                  <Route path="/diary/:id/:key/edit" element={<BookEdit />} />
-                  <Route path="/new" element={<New />} />
-                </Routes>
-              ) : (
-                <Routes>
-                  <Route path="/" element={<Main />} />
-                  <Route path="/login" element={<Userlogin />} />
-                  <Route path="/register" element={<Register />} />
-                </Routes>
-              )}
+                <Route path="/setting" element={<Setting />} />
+                <Route path="/diary/:id/edit" element={<Edit />} />
+                <Route path="/diary/:id/new" element={<BookNew />} />
+                <Route path="/diary/:id" element={<BookDiary />} />
+                <Route path="/diary/:id/:key/read" element={<BookContent />} />
+                <Route path="/name" element={<Name />} />
+                <Route path="/diary/:id/write" element={<BookEdit />} />
+                <Route path="/diary/:id/:key/edit" element={<BookEdit />} />
+                {/* <Route path="/new" element={<New />} /> */}
+                <Route path="*" element={<Navigate to="/"></Navigate>} />
+                <Route
+                  path="/login"
+                  element={isLoggedIn ? <Home /> : <Userlogin />}
+                />
+                <Route
+                  path="/register"
+                  element={isLoggedIn ? <Home /> : <Register />}
+                />
+              </Routes>
             </div>
           </BrowserRouter>
         </BookDispatchContext.Provider>

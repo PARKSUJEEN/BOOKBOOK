@@ -17,7 +17,7 @@ const Modal = ({ modalOption }) => {
                 &times;
               </button>
             </header>
-            {modalOption?.element}
+            <div className="contents">{modalOption?.element}</div>
           </section>
         </div>
       )}

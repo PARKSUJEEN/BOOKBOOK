@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import BookList from "../../components/BookList";
 
@@ -34,9 +34,10 @@ const Home = () => {
   const onMenu = useCallback(() => {
     showModal(
       true,
-      "setting",
+      "설정",
       () => console.log("모달 on"),
       null,
+
       <Setting
         data={data}
         onClose={() => {
@@ -48,6 +49,7 @@ const Home = () => {
 
   const udata = useContext(userContext);
   const bdata = useContext(BookStateContext);
+
   return (
     <div>
       <MyHeader
@@ -67,6 +69,7 @@ const Home = () => {
       />
       {/* <BookSearch /> */}
       <Modal modalOption={modalOption} />
+
       <BookList bookdata={data} />
     </div>
   );

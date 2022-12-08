@@ -11,7 +11,7 @@ const BookSearch = () => {
   const data = useContext(BookStateContext);
   const findBook = () => {
     const filteredBook = data.data.filter((it) => {
-      return it.bookname.includes(bookname);
+      it.bookname.includes(bookname);
     });
     return setInBook(filteredBook);
   };

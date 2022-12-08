@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { BookStateContext } from "../App";
+import React, { useEffect, useState } from "react";
 import Pagination from "../pages/Book/Pagination";
-import Loading from "../pages/Main/Loading";
-import NullPage from "../pages/Main/NullPage";
 import BookItem from "./BookItem";
 
-const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
+const BookList = ({ bookdata }) => {
   const [bookname, setBookname] = useState("");
   const [findBook, setFindBook] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,8 +12,9 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
   const offset = (page - 1) * limit;
 
   useEffect(() => {
-    if (searchBook === undefined || searchBook === null) {
-      return setFindBook(bookdata);
+    console.log(bookdata);
+    if (bookdata) {
+      setFindBook(bookdata);
     }
   }, [bookdata]);
 
@@ -24,14 +22,11 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
     setBookname(e.currentTarget.value);
   };
 
-  const data = useContext(BookStateContext);
-
   const findingBook = () => {
-    const filteredBook = data.data.filter((it) => {
+    const filteredBook = bookdata.filter((it) => {
       return it.bookname.includes(bookname);
     });
-
-    return setFindBook(filteredBook);
+    setFindBook(filteredBook);
   };
 
   const sortDate = () => {
@@ -46,7 +41,7 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
         <div className="search">
           <input
             type="text"
-            placeholder="책이름"
+            placeholder="책 이름"
             onChange={onChangeBookname}
           ></input>
         </div>
@@ -54,11 +49,10 @@ const BookList = ({ onRemove, onEdit, bookdata, searchBook }) => {
           <button onClick={findingBook}>검색</button>
         </div>
       </div>
-      {loading ? <Loading /> : null}
 
       {findBook.length === 0 ? (
         <div className="booklist_wrapper">
-          <p>찾으시는책이 존재하지 않습니다.</p>
+          <p>찾으시는 책이 존재하지 않습니다.</p>
         </div>
       ) : (
         <>

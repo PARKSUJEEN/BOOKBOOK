@@ -6,7 +6,7 @@ const NullPage = () => {
     <div className="NullPage">
       <div className="NullPage_wrap">
         <div className="bear">
-          {id === null ? (
+          {id === undefined ? (
             <>
               <label>୧ʕ•̀ᴥ•́ʔ୨</label>
               <span>읽고 있는 책을 등록해주세요</span>
@@ -18,7 +18,7 @@ const NullPage = () => {
           )}
         </div>
         <div className="info">
-          <span>읽고 있는 책을 등록해주세요</span>
+          <span>읽고 있는 책을 기록해주세요.</span>
         </div>
       </div>
     </div>

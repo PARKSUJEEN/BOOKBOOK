@@ -22,13 +22,7 @@ const BookDiary = () => {
   const [loading, setLoading] = useState(true);
 
   const onClick = useCallback(() => {
-    showModal(
-      true,
-      "책 수정하기",
-      () => console.log("모달 on"),
-      null,
-      <Edit />
-    );
+    showModal(true, "책 수정하기", null, null, <Edit />);
   }, [modalOption]);
 
   useEffect(() => {
@@ -36,14 +30,11 @@ const BookDiary = () => {
     if (targetName) {
       setBname(targetName);
       setLoading(false);
-    } else {
-      setLoading(true);
     }
   }, [id, initData.data]);
 
   return (
     <div className="Bookdiary">
-      {/* {loading ? <Loading /> : null} */}
       <div>
         <MyHeader
           leftChild={
@@ -58,13 +49,22 @@ const BookDiary = () => {
               }
             />
           }
-          headText={loading ? "" : `${bname.bookname}`.slice(0, 19)}
+          headText={loading ? "" : `${bname.bookname}`}
         />
       </div>
 
       <div className="BookDiary_wrap">
-        {initData.bddata.length > 1 ? null : <NullPage />}
+        {initData.bddata.length >= 1 ? null : <NullPage />}
         <div className="BookDiary_btn">
+          <button
+            onClick={() => {
+              if (id) {
+                onClick(id);
+              }
+            }}
+          >
+            수정
+          </button>
           <button
             onClick={() => {
               if (window.confirm(`책을 정말 삭제하실건가요?`)) {
@@ -73,16 +73,7 @@ const BookDiary = () => {
               }
             }}
           >
-            Del
-          </button>
-          <button
-            onClick={() => {
-              if (id) {
-                onClick(id);
-              }
-            }}
-          >
-            Edit
+            삭제
           </button>
         </div>
         <Modal modalOption={modalOption} />

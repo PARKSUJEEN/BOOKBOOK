@@ -37,6 +37,22 @@ body {
     
   }
 
+  /* Header */
+
+  header {
+  font-size: 10px;
+  }
+
+  header .head_text {
+  display:block;
+  overflow: hidden;
+  /* 잘리는부분 ...으로 */
+  text-overflow: ellipsis;
+  /* 아래줄로 내려가는 것 막기 */
+  white-space: nowrap; 		
+  word-break:break-all;
+  }
+
   /* BookItem */
 
 
@@ -80,6 +96,17 @@ body {
     font-size: 5px;
 
   }
+
+  /* BookEditor - Modal */
+
+  .BookEditor .BookEditor_btn{
+
+    margin-top: 10px;
+    margin-left: 200px;
+ 
+  }
+
+
 
 }
 
@@ -203,13 +230,6 @@ color: black;
 
 }
 
-.MyButton span:HOVER {
-  color: #8d5c24;
-  background-color: #fff;
-
-
-
-}
 
 .bookbook_Home {
   align-items: center;
@@ -241,10 +261,12 @@ header > div {
 
 header .head_text {
   width: 50%;
-  font-size: 30px;
-  justify-content: center;
+  font-size: 1.7em;
+  text-align: center;
    /* 영역감추기 */
-   /* overflow: hidden;   */
+  display:block;
+  
+  overflow: hidden;
    /* 잘리는부분 ...으로 */
    text-overflow: ellipsis;
    /* 아래줄로 내려가는 것 막기 */
@@ -299,7 +321,7 @@ header .head_btn_right  {
 
   font-family: 'Noto Sans KR';
 
-  margin: auto;
+  /* margin: auto; */
   padding: 20px;
 
 }
@@ -332,29 +354,20 @@ header .head_btn_right  {
 }
 
 
-
-
-
 .BookEditor .bookname{
-
-
-  
 }
-
-
-
-
 
 .BookEditor button{
   
   cursor: pointer;
+  
 
   font-family: 'Noto Sans KR';
 
-  font-size: 16px;
+  font-size: 15px;
 
   border-radius: 7px;
-  width: 130px;
+  width: 100px;
   height: 40px;
   padding: auto;
 
@@ -386,12 +399,11 @@ header .head_btn_right  {
 
 }
 
-.BookEditor .BookEditor_btn{
+.BookEditor_btn{
 
 margin-top: 10px;
-margin-left: 280px;
-
-
+margin-left: 240px;
+justify-content: center;
 }
 
 
@@ -502,7 +514,7 @@ margin-left: 280px;
 }
 
 .bcolor_7:checked {
-  background-color: #FBF5E9;
+  background-color: #ffffff;
   border: 5px solid #1f3176;
 }
 
@@ -512,7 +524,7 @@ margin-left: 280px;
 }
 
 .bcolor_8:checked {
-  background-color: #FBF5E9;
+  background-color: #ffffff;
   border: 5px solid #3c1119;
 }
 
@@ -567,6 +579,10 @@ margin-left: 280px;
   background-color: #703d13;
   width: 40px;
   height: 20px;
+  font-size: 13px;
+  white-space: nowrap; 		
+  word-break:break-all;
+
 }
 
 .BookList h2{
@@ -899,6 +915,7 @@ background-color:  #8d5c24;
 }
 
 .BookDiary_btn button{
+  cursor: pointer;
   margin-right: 20px;
   margin-left: 20px;
   border: none;
@@ -927,7 +944,7 @@ background-color:  #8d5c24;
 
   font-size: 17px;
   font-family: 'Noto Sans KR';
-
+  font-weight: 200;
 }
 
 /* BookDiaryList */
@@ -974,7 +991,7 @@ background-color:  #8d5c24;
 
 .BookDiaryItem_wrap{
   
-  border: 3px solid #a5a5a5;
+  border: 1px solid #000000;
   border-radius: 5px;
 
   margin-left: 20px;
@@ -990,7 +1007,7 @@ background-color:  #8d5c24;
 .BookDiaryItem_wrap .title{
 
  
-  margin-top: -10px;
+  margin-top: -13px;
 
   
   
@@ -999,8 +1016,9 @@ background-color:  #8d5c24;
 .BookDiaryItem_wrap .title h3{
   color: #544b49;
   font-size: 25px;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-right: 10px;
+
 
 
   overflow: hidden;  
@@ -1124,8 +1142,11 @@ background-color:  #8d5c24;
     margin-left: 20px;
     margin-right: 20px;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
+    white-space: nowrap; 		
+    word-break: break-all;
     font-family: 'Noto Sans KR';
+    font-weight: 100;
 
 }
 
@@ -1312,12 +1333,14 @@ background-color:  #8d5c24;
 .Pagination {
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 
 .Pagination button {
     margin-left: 10px;
     margin-right: 10px;
+
     cursor: pointer;
     border: none;
     border-radius: 50%;

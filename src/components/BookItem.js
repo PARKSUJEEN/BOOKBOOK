@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookDispatchContext, BookStateContext } from "../App";
 
 const BookItem = ({ bookname, id, bookcolor, bookdate }) => {
   const navigate = useNavigate();
-  const { onRemove } = useContext(BookDispatchContext);
 
   const goDetail = () => {
     navigate(`/diary/${id}`);
@@ -22,18 +20,11 @@ const BookItem = ({ bookname, id, bookcolor, bookdate }) => {
           <div className="info">
             <span>{bookname}</span>
           </div>
-          {/* <button
-            onClick={() => {
-              onRemove(id);
-            }}
-          >
-            삭제
-          </button> */}
-          <div>{strDate.slice(0, 12)} </div>
+          <div>{strDate.slice(0, strDate.length - 11)} </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default BookItem;
+export default React.memo(BookItem);

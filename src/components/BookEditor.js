@@ -12,12 +12,9 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
   const [bookname, setBookname] = useState("");
   const [bookColor, setBookColor] = useState(3);
   const [bookdate, setBookdate] = useState(getStringDateTime(new Date()));
+
   const userData = useContext(userContext);
   const navigate = useNavigate();
-
-  const handleChangeBook = (e) => {
-    setBookname(e.target.value);
-  };
 
   const onChangeBookC = (id) => {
     setBookColor(id);
@@ -92,18 +89,17 @@ const BookEditor = ({ isEdit, originData, onClose }) => {
             ))}
           </div>
         </section>
-      </div>
-
-      <div className="BookEditor_btn">
-        {isEdit ? (
-          <>
-            <button onClick={handleSubmit}>책 수정하기</button>
-          </>
-        ) : (
-          <>
-            <button onClick={handleSubmit}>책 추가</button>
-          </>
-        )}
+        <div className="BookEditor_btn">
+          {isEdit ? (
+            <>
+              <button onClick={handleSubmit}>책 수정하기</button>
+            </>
+          ) : (
+            <>
+              <button onClick={handleSubmit}>책 추가</button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

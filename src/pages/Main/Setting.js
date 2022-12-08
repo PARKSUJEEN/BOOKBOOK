@@ -4,19 +4,9 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import {
-  collection,
-  collectionGroup,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-  where,
-  writeBatch,
-} from "firebase/firestore";
+
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../assets/fbase";
 
 const Setting = ({ onClose, data }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

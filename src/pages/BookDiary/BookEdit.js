@@ -30,7 +30,7 @@ const BookEdit = () => {
         navigate(-1, { replace: true });
       }
     }
-  }, [id, initBookData.bddata]);
+  }, [id, initBookData.bddata.length]);
 
   return (
     <div>

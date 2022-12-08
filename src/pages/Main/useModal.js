@@ -23,7 +23,6 @@ const useModal = () => {
           setModalOption((prev) => ({ ...prev, show: false }));
         },
         onClose: () => {
-          console.log("실행됨..onclose");
           if (onCloseCallback) onCloseCallback();
           setModalOption((prev) => ({ ...prev, show: false }));
         },
